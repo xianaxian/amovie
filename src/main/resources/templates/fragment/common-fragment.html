@@ -90,16 +90,29 @@
             <div class="auth auth--home">
                 <div class="auth__show">
                 </div>
-                <a href="#" class="btn btn--sign btn--singin">
-                    me
-                </a>
-                <ul class="auth__function">
-                    <li><a href="/watchlist.html" class="auth__function-item">观看列表</a></li>
-                    <li><a href="/ticket.html" class="auth__function-item">已预定的电影票</a></li>
-                    <li><a href="" class="auth__function-item">退出登录</a></li>
-                </ul>
+                  <!--/*@thymesVar id="user" type="com.ecjtu.amovie.entity.User"*/-->
+                  <div th:if="${session.user!=null}">
+                      <a href="#" class="btn btn--sign btn--singin"><span th:text="${session.user.nickname}"> </span></a>
+                      <ul class="auth__function">
+                          <li><a href="/watchlist.html" class="auth__function-item">观看列表</a></li>
+                          <li><a href="/ticket.html" class="auth__function-item">已预定的电影票</a></li>
+                          <li><a href="user/logout" class="auth__function-item">退出登录</a></li>
+                      </ul>
+                  </div>
+                <span th:if="${session.user==null}">
+                    <a href="#" class="btn btn-md btn&#45;&#45;warning btn&#45;&#45;book btn-control&#45;&#45;home login-window" style="position: absolute;top: 10px"
+                    >登陆</a>
+                </span>
+<!--                <div >-->
+<!--                    <a href="#" class="btn btn-md btn&#45;&#45;warning btn&#45;&#45;book btn-control&#45;&#45;home login-window">登陆</a>-->
+<!--                </div>-->
+
             </div>
-            <a href="#" class="btn btn-md btn--warning btn--book btn-control--home login-window">预订</a>
+            <div th:if="${session.user!=null}">
+                <a href="#" class="btn btn-md btn--warning btn--book btn-control--home login-window">预订</a>
+            </div>
+
+
         </div>
     </div>
 </header>

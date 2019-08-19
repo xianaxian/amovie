@@ -73,4 +73,9 @@ public class User {
     public void setRole(Integer role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", nickname='" + nickname + '\'' + ", email='" + email + '\'' + ", password='" + password + '\'' + ", salt='" + salt + '\'' + ", phone='" + phone + '\'' + ", gender=" + gender + ", role=" + role + '}';
+    }
 }
