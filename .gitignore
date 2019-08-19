@@ -3,5 +3,6 @@
 target
 *.iml
 mvnw
+test
 mvnw.cmd
 HELP.md
