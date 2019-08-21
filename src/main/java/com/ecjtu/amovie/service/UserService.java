@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServce {
+public class UserService {
     @Autowired
     private UserRepository userRepository;
     public int saveOne(User user){
@@ -17,8 +17,8 @@ public class UserServce {
         return userRepository.findOneByEmail(email);
     }
 
-    public boolean isEmailExit(String email){
-        int count = userRepository.isEmailExit(email);
+    public boolean isEmailExists(String email){
+        int count = userRepository.isEmailExists(email);
         return count!=0;
     }
 }

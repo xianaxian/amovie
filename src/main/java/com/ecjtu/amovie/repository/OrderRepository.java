@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface OrderRepository {
 
-    @Insert("INSERT INTO `order` (status, user_id, create_time, scene_id, ticket_num, total_price, booked_seated) " + "VALUES (#{status},#{userId},#{createTime},#{sceneId},#{tickleNum},#{totalPrice},#{bookedSeated})")
+    @Insert("INSERT INTO `order` (status, user_id, create_time, scene_id, ticket_num, total_price, booked_seated) " + "VALUES (#{status},#{userId},#{createTime},#{sceneId},#{ticketNum},#{totalPrice},#{bookedSeated})")
     int saveOne(Order order);
 
     @Delete("DELETE FROM `order` WHERE id=#{id} ")
@@ -26,10 +26,10 @@ public interface OrderRepository {
     int updateOne(Order order);
 
 
-    @Select("SELECT * FROM `order` where id=#{id};")
+    @Select("SELECT * FROM `order` where id=#{id}")
     Order selectOne(Integer id);
 
 
-    @Select("SELECT * FROM `order`;")
+    @Select("SELECT * FROM `order`")
     List<Order> selectAll();
 }

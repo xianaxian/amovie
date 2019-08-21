@@ -22,10 +22,10 @@ public interface ReviewRepository {
     @Update("UPDATE review SET content  = #{content} WHERE id=#{id};")
     int updateOne(Review review);
 
-    @Select("SELECT * FROM review where id=#{id};")
+    @Select("SELECT * FROM review where id=#{id}")
     Review selectOne(Integer id);
 
-    @Select("SELECT * FROM review;")
+    @Select("SELECT * FROM review")
     List<Review> selectAll();
 
 }

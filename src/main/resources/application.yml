@@ -9,9 +9,19 @@ spring:
   devtools:
     livereload:
       enabled: true
+  http:
+    encoding:
+      force: true
+      charset: utf-8
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+  mapper-locations: /mappers/*.xml
 logging:
   level:
     root: warn
+pagehelper:
+#  auto-dialect: mysql
+#  reasonable: true
+  helper-dialect: mysql
+#  support-methods-arguments: true

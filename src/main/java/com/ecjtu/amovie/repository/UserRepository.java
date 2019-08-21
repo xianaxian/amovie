@@ -18,7 +18,7 @@ public interface UserRepository {
 
 
     @Select("select count(*) from user where email=#{email}")
-    int isEmailExit(String email);
+    int isEmailExists(String email);
 
     @Select("select * from user where id=#{id}")
     User findById(Integer id);

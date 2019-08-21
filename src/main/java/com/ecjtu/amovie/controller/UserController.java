@@ -1,7 +1,7 @@
 package com.ecjtu.amovie.controller;
 
 import com.ecjtu.amovie.entity.User;
-import com.ecjtu.amovie.service.UserServce;
+import com.ecjtu.amovie.service.UserService;
 import com.ecjtu.amovie.utils.MD5Utils;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,29 +14,29 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserServce userServce;
+    private UserService userService;
 
     @RequestMapping("/isEmailExit")
     public void isEmailExit(@RequestParam("email") String email) {
-        boolean emailExit = userServce.isEmailExit(email);
+        boolean emailExit = userService.isEmailExists(email);
         System.out.println();
     }
 
     @RequestMapping("/register")
     public void register(@RequestParam("user") User user) {
-        if (userServce.isEmailExit(user.getEmail())) {
+        if (userService.isEmailExists(user.getEmail())) {
             return;
         }
         String salt = MD5Utils.getSalt();
         user.setSalt(salt);
         user.setPassword(MD5Utils.md5(user.getPassword(), salt));
-        int i = userServce.saveOne(user);
+        int i = userService.saveOne(user);
     }
 
     @ResponseBody
     @PostMapping("/login")
     public JsonResult<String> login(String email, String password, HttpSession session) {
-        User login = userServce.findOneByEmail(email);
+        User login = userService.findOneByEmail(email);
         if (login == null) {
             return JsonResult.error(233, "登陆失败，错误的用户名或密码");
         }

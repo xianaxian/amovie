@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface NewsRepository {
 
-    @Insert("INSERT INTO news (content, create_time) VALUES (#{content},#{createTime});")
+    @Insert("INSERT INTO news (content, create_time) VALUES (#{content},#{createTime})")
     int saveOne(News news);
 
     @Delete("DELETE FROM news WHERE id = #{id}")
@@ -23,13 +23,13 @@ public interface NewsRepository {
      * @param news
      * @return
      */
-    @Update("UPDATE news SET content  =  #{content} WHERE id=#{id};")
+    @Update("UPDATE news SET content  =  #{content} WHERE id=#{id}")
     int updateOne(News news);
 
-    @Select("SELECT * FROM news where id=#{id};")
+    @Select("SELECT * FROM news where id=#{id}")
     News selectOne(Integer id);
 
-    @Select("SELECT * FROM news;")
+    @Select("SELECT * FROM news")
     List<News> selectAll();
 
 }

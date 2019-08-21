@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.amovie.repository.SceneRepository">
+
+  <update id="updateOne" parameterType="com.ecjtu.amovie.entity.Scene">
+    update scene
+    <set>
+      <if test="movieId != null">
+        movie_id = #{movieId,jdbcType=VARCHAR},
+      </if>
+      <if test="movieName != null">
+        movie_name = #{movieName ,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNum != null">
+        seat_num = #{seatNum,jdbcType=VARCHAR},
+      </if>
+      <if test="showtime != null">
+        showtime = #{showtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>
