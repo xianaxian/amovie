@@ -9,6 +9,9 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 
+/**
+ * @author xianaixan
+ */
 public interface ReviewRepository {
 
     @Insert("INSERT INTO review (content, movie_id, user_id, create_time)" +

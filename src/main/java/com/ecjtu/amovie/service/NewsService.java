@@ -9,11 +9,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * @author xianaixan
+ */
 @Service
 public class NewsService {
 
-    @Autowired
-    private NewsRepository newsRepository;
+    private final NewsRepository newsRepository;
+
+    public NewsService(NewsRepository newsRepository) {
+        this.newsRepository = newsRepository;
+    }
 
 
     /**

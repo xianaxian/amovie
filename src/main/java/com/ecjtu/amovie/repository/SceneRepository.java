@@ -12,6 +12,7 @@ import java.util.ListResourceBundle;
 
 /**
  * 没测试
+ * @author xianaixan
  */
 @Repository
 public interface SceneRepository {

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 
+/**
+ * @author xianaixan
+ */
 @Repository
 public interface CategoryRepository {
 

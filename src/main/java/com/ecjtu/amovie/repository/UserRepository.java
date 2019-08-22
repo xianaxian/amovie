@@ -8,6 +8,9 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ * @author xianaixan
+ */
 @Repository
 public interface UserRepository {
     @Insert("insert into user (nickname, email, password, salt, phone, gender, role) VALUES (#{nickname},#{email},#{password},#{salt},#{phone},#{gender},#{role})")

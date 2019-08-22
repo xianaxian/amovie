@@ -11,13 +11,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author xianaixan
+ */
 @Service
 public class SceneService {
 
-    @Autowired
-    private SceneRepository sceneRepository;
-    @Autowired
-    private MovieRepository movieRepository;
+    private final SceneRepository sceneRepository;
+    private final MovieRepository movieRepository;
+
+    public SceneService(SceneRepository sceneRepository, MovieRepository movieRepository) {
+        this.sceneRepository = sceneRepository;
+        this.movieRepository = movieRepository;
+    }
 
 
     /**

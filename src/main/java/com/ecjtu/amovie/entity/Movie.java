@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * 电影
+ * @author xianaixan
  */
 @Builder
 @Data
@@ -18,18 +19,25 @@ import java.util.List;
 public class Movie {
     private Integer id;
     private String name;
-    //电影时长
+    /**
+     * 电影时长
+     */
     private String duration;
     private String directors;
     private String actors;
     private Date releaseDate;
-    private String categoryId;
     private Integer status;
-    //电影剧情
+    /**
+     * 电影剧情
+     */
     private String plot;
     private String poster;
     private String country;
+    /**
+     * 冗余的字段
+     */
+    private Integer[] categoryIds;
 
-    private List<Category> list;
+    private List<Category> categories;
 
 }

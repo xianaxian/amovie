@@ -6,6 +6,10 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * @author 组长
+ */
+@SuppressWarnings({"ALL", "AlibabaClassNamingShouldBeCamel"})
 public class MD5Utils {
 
     //写一个md5加密的方法

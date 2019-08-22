@@ -9,6 +9,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author xianaixan
+ */
 @SuppressWarnings("ALL")
 public class Json {
 

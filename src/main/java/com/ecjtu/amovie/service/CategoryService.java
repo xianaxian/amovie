@@ -9,15 +9,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author xianaixan
+ */
 @Service
 public class CategoryService {
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
+
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     /**
      * 分页获取分类
-     * @param pageNum
-     * @param pageSize
+     * @param pageNum 页码
+     * @param pageSize 每页的大小
      * @return 分页的信息
      */
     public Page<Category>  getCategoriesByPage(int pageNum,int pageSize){

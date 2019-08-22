@@ -1,87 +1,97 @@
 package com.ecjtu.amovie.service;
 
-import com.ecjtu.amovie.entity.Category;
 import com.ecjtu.amovie.entity.Movie;
-import com.ecjtu.amovie.repository.CategoryRepository;
 import com.ecjtu.amovie.repository.MovieRepository;
-import com.ecjtu.amovie.utils.Json;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
+/**
+ * @author xianaixan
+ */
 @Service
 public class MovieService {
 
-    @Autowired
-    private MovieRepository movieRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
+    private final MovieRepository movieRepository;
+
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
     /**
      * 分页获取电影列表
-     * @param pageNum
-     * @param pageSize
+     *
+     * @param pageNum  页码
+     * @param pageSize 每页的大小
      * @return 分页的信息
      */
-    public Page<Movie> getMoviesByPage(int pageNum, int pageSize){
-        Page<Movie> movies = PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> movieRepository.selectAll());
-        for (Movie movie : movies) {
-            String categoryId = movie.getCategoryId();
-            if (StringUtils.isEmpty(categoryId)){
-                continue;
-            }
-            List<Integer> ids = Json.parseArray(categoryId, Integer.class);
-            List<Category> temp = new ArrayList<>();
-            for (Integer id : ids) {
-                Category category = categoryRepository.selectOne(id);
-                temp.add(category);
-            }
-            movie.setList(temp);
-        }
-        return movies;
+    public Page<Movie> getMoviesByPage(int pageNum, int pageSize) {
+        return PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> movieRepository.selectAll());
     }
 
 
     /**
      * 获取某个电影
+     *
      * @param id 电影的ID
-     * @return
+     * @return 某个电影
      */
-    public Movie getOneMovieById(Integer id){
-        Movie movie = movieRepository.selectOne(id);
-        String categoryId = movie.getCategoryId();
-        if (!StringUtils.isEmpty(categoryId)){
-            List<Integer> ids = Json.parseArray(categoryId, Integer.class);
-            List<Category> temp = new ArrayList<>();
-            for (Integer integer : ids) {
-                temp.add(categoryRepository.selectOne(integer));
-            }
-            movie.setList(temp);
-        }
-        return movie;
+    public Movie getOneMovieById(Integer id) {
+        return movieRepository.selectOne(id);
     }
+
 
     /**
-     * 插入一个分类
-     * @param movie
-     * @return
+     * 插入一个电影
+     *
+     * @param movie 插入的电影
+     * @return 返回的是受影响的行数，1为插入成功
      */
-    public int insertOneMovie(Movie movie){
-        return movieRepository.saveOne(movie);
+    @Transactional(rollbackFor = RuntimeException.class)
+    public int insertOneMovie(Movie movie) {
+        int i = movieRepository.saveOne(movie);
+        int movieId = movie.getId();
+        Integer[] cIds = movie.getCategoryIds();
+        movieRepository.insertCategories(movieId, Arrays.asList(cIds));
+        for (Integer cid : cIds) {
+            movieRepository.insertCategoryOne(movieId, cid);
+        }
+        return i;
     }
 
+
+    /**
+     * 此处更新，更新电影的类别的时候，由于多对多关系，直接先删除movie_category中与该电影相关的数据再重新插入,目前没有更好的想法
+     *
+     * @param movie 更新的电影的信息
+     * @return 返回是否更新成功
+     */
+    @Transactional
     public int updateOneMovie(Movie movie) {
+        if (movie.getCategoryIds() == null) {
+            return movieRepository.updateOne(movie);
+        }
+        Integer[] ids = movie.getCategoryIds();
+        Integer movieId = movie.getId();
+        movieRepository.deleteCategories(movieId);
+        movieRepository.insertCategories(movieId, Arrays.asList(ids));
         return movieRepository.updateOne(movie);
     }
 
 
-
-    public int deleteOneMovie(Integer id){
+    /**
+     * 删除一个电影，顺便把movie_category表中的相关数据删除
+     *
+     * @param id 电影的id
+     * @return 返回删除电影表的受影响的行数, 1表示删除成功, 此处写的很奇怪
+     */
+    @Transactional
+    public int deleteOneMovie(Integer id) {
+        movieRepository.deleteCategories(id);
         return movieRepository.deleteOne(id);
     }
 }

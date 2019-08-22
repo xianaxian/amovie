@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+/**
+ * @author xianaixan
+ */
 @Builder
 @Data
 @AllArgsConstructor

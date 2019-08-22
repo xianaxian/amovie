@@ -2,41 +2,115 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ecjtu.amovie.repository.MovieRepository">
 
-  <update id="updateOne" parameterType="com.ecjtu.amovie.entity.Movie">
-    update movie
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="duration != null">
-        duration = #{duration,jdbcType=VARCHAR},
-      </if>
-      <if test="directors != null">
-        directors = #{directors,jdbcType=VARCHAR},
-      </if>
-      <if test="actors != null">
-        actors = #{actors,jdbcType=VARCHAR},
-      </if>
-      <if test="releaseDate != null">
-        release_date = #{releaseDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="categoryId != null">
-        category_id = #{categoryId,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="plot != null">
-        plot = #{plot,jdbcType=VARCHAR},
-      </if>
-      <if test="poster != null">
-        poster = #{poster,jdbcType=VARCHAR},
-      </if>
-      <if test="country != null">
-        country = #{country,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+    <resultMap id="movieWithCategory" type="com.ecjtu.amovie.entity.Movie">
+        <result column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="duration" property="duration"/>
+        <result column="directors" property="directors"/>
+        <result column="actors" property="actors"/>
+        <result column="release_date" property="releaseDate"/>
+        <result column="status" property="status"/>
+        <result column="plot" property="plot"/>
+        <result column="poster" property="poster"/>
+        <result column="country" property="country"/>
+        <collection property="categories" ofType="com.ecjtu.amovie.entity.Category">
+            <id column="category_id" property="id"/>
+            <result column="category_name" property="name"/>
+        </collection>
+    </resultMap>
+
+
+    <!--使用嵌套查询出现分页错误-->
+    <resultMap id="movieWithCategoryA" type="com.ecjtu.amovie.entity.Movie">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="duration" property="duration"/>
+        <result column="directors" property="directors"/>
+        <result column="actors" property="actors"/>
+        <result column="release_date" property="releaseDate"/>
+        <result column="status" property="status"/>
+        <result column="plot" property="plot"/>
+        <result column="poster" property="poster"/>
+        <result column="country" property="country"/>
+        <collection column="id" property="categories" ofType="com.ecjtu.amovie.entity.Category"
+                    select="selectCategoryOfMovie">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+        </collection>
+    </resultMap>
+    <update id="updateOne" parameterType="com.ecjtu.amovie.entity.Movie">
+        update movie
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="duration != null">
+                duration = #{duration,jdbcType=VARCHAR},
+            </if>
+            <if test="directors != null">
+                directors = #{directors,jdbcType=VARCHAR},
+            </if>
+            <if test="actors != null">
+                actors = #{actors,jdbcType=VARCHAR},
+            </if>
+            <if test="releaseDate != null">
+                release_date = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="plot != null">
+                plot = #{plot,jdbcType=VARCHAR},
+            </if>
+            <if test="poster != null">
+                poster = #{poster,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过电影id查询分类-->
+    <select id="selectCategoryOfMovie" parameterType="int" resultType="com.ecjtu.amovie.entity.Category">
+        select category.*
+        from movie_category
+                 left join category ON category.id = movie_category.category_id
+        where movie_id = #{movieId}
+    </select>
+
+    <select id="selectAll" resultMap="movieWithCategoryA">
+        select *
+        from movie
+    </select>
+    <select id="selectOne" resultMap="movieWithCategoryA" parameterType="int">
+        select *
+        from movie
+        where id = #{id}
+    </select>
+    <select id="selectByName" resultMap="movieWithCategory" parameterType="string">
+        select *
+        from movie
+        where name like CONCAT('%', #{name}, '%')
+    </select>
+
+    <select id="selectByCategory" resultMap="movieWithCategoryA" parameterType="int">
+        select *
+        from movie
+        WHERE id in (
+            select movie_id
+            from movie_category
+            where category_id = #{id})
+    </select>
+
+    <insert id="insertCategories">
+        INSERT INTO movie_category (movie_id, category_id)
+        VALUES
+        <foreach collection="ids" item="i" separator=",">
+            (#{movieId},#{i})
+        </foreach>
+    </insert>
 
 </mapper>

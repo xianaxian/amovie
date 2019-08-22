@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author xianaixan
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -52,7 +55,6 @@ public class UserController {
     }
 
 
-//    @ResponseBody
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();

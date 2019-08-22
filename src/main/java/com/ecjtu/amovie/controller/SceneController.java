@@ -11,10 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author xianaixan
+ */
 @Controller
 public class SceneController {
-    @Autowired
-    private SceneService sceneService;
+    private final SceneService sceneService;
+
+    public SceneController(SceneService sceneService) {
+        this.sceneService = sceneService;
+    }
 
 
     /**

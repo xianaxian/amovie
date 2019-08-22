@@ -9,6 +9,7 @@ import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,11 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author xianaixan
+ */
 @Controller
 @RequestMapping("/categories")
 public class CategoryController {
-    @Autowired
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     /*    *//**
      * 获取的是没有分页的分类
@@ -39,8 +46,8 @@ public class CategoryController {
     /**
      * 查询电影类别列表
      *
-     * @param pageNum
-     * @param pageSize
+     * @param pageNum 页码
+     * @param pageSize 每页的大小
      */
     @GetMapping
     @ResponseBody
@@ -66,12 +73,12 @@ public class CategoryController {
     /**
      * 创建类别
      *
-     * @param category
-     * @return
+     * @param category 类别的嘻嘻
+     * @return Jsons数据
      */
     @PostMapping()
     @ResponseBody
-    public JsonResult categories(@RequestBody Category category) {
+    public JsonResult categories(@Validated @RequestBody Category category) {
         int i = categoryService.insertOneCategory(category.getName());
         JsonResult result;
         if (i == 1) {

@@ -5,6 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author xianaixan
+ */
 @SpringBootApplication
 @MapperScan("com.ecjtu.amovie.repository")
 public class AmovieApplication {
