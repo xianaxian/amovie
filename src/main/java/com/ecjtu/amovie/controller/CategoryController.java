@@ -30,10 +30,11 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    /*    *//**
+    /**
      * 获取的是没有分页的分类
      * @param response
-     *//*
+     * @return
+     */
     @GetMapping("/categoriesAll")
     @ResponseBody
     public JsonResult<List<Category>> categories(HttpServletResponse response){
@@ -41,7 +42,7 @@ public class CategoryController {
         JsonResult<List<Category>> result=JsonResult.success("查询电影分类成功",categories);
         return result;
 
-    }*/
+    }
 
     /**
      * 查询电影类别列表

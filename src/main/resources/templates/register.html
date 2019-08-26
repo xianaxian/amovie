@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- head -->
+<div th:replace="~{/fragment/common-fragment :: head(注册)}"></div>
+
+<body>
+<div class="wrapper">
+    <!-- Header section -->
+  <div th:replace="~{/fragment/common-fragment :: header}"></div>
+
+    <!-- Main content -->
+    <form id="register-form" class="login" method="post" novalidate="">
+        <p class="login__title">
+            注册 <br/><span class="login-edition">欢迎来到 A.Movie</span>
+        </p>
+
+        <div class="field-wrap">
+            <label>
+                <input
+                        type="text"
+                        placeholder="昵称"
+                        name="nickname"
+                        class="login__input"
+                >
+            </label>
+            <label>
+                <input
+                        type="email"
+                        placeholder="邮箱"
+                        name="email"
+                        class="login__input"
+                >
+            </label>
+            <label>
+                <input
+                        type="password"
+                        placeholder="密码"
+                        name="password"
+                        class="login__input"
+                >
+            </label>
+            <label>
+                <input
+                        type="password"
+                        placeholder="确认密码"
+                        name="rpassword"
+                        class="login__input"
+                >
+            </label>
+            <label>
+                <input
+                        type="text"
+                        placeholder="手机号"
+                        name="phone"
+                        class="login__input"
+                >
+            </label>
+            <label>
+                <select class="login__input" name="gender" placeholder="请选择性别">
+                    <option value="1">女</option>
+                    <option value="2">男</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="login__control">
+            <button type="submit" class="btn btn-md btn--warning btn--wider">
+                注册
+            </button>
+            <a href="login.html" class="login__tracker form__tracker">我已有账号，点击登陆</a>
+        </div>
+    </form>
+
+    <div class="clearfix"></div>
+</div>
+
+<div th:replace="~{/fragment/common-fragment :: footer}"></div>
+
+<!-- open/close -->
+<div th:replace="~{/fragment/common-fragment :: pop}"></div>
+
+<!-- JavaScript-->
+<div th:replace="~{/fragment/common-fragment :: script}"></div>
+</body>
+</html>

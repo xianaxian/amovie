@@ -76,7 +76,7 @@ $(function () {
         }); // end post
     }); // end submit
 
-    $('.login').submit(function (e) {
+    $('#login-form').submit(function (e) {
         e.preventDefault();
         var error = 0;
         var self = $(this);
@@ -125,14 +125,89 @@ $(function () {
                 });
                 $(successMsg).appendTo(self).hide().delay(300).fadeIn();
 
-                setTimeout(()=>{
-                    window.location.href='/';
-                },300);
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 300);
             })
             //定义网络错误的函数
             .error(() => alert("网络错误"))
             //成功或者失败都调用的函数，启用按钮
             .complete(() => self.find('[type=submit]').removeAttr('disabled'));
+    });
+
+    $('#register-form').submit(function (e) {
+        e.preventDefault();
+        var error = 0;
+        var self = $(this);
+
+        var $name = self.find('[name=nickname]');
+        var $email = self.find('[type=email]');
+        var $pass = self.find('[name=password]');
+        var $repass = self.find('[name=rpassword]');
+        var $phone = self.find('[name=phone]');
+        var $gender = self.find('[name=gender]');
+
+        //昵称校验，长度大于一，
+        if ($name.val().length > 1) {
+            $name.removeClass('invalid_field');
+        } else {
+            //错误，error+1
+            createErrTult('Error! Wrong nikename!', $name);
+            error++;
+        }
+
+
+        var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+        //校验正则
+        if (!emailRegex.test($email.val())) {
+            createErrTult("Error! Wrong email!", $email);
+            error++;
+            //不对，error+1；
+        }
+        //密码校验，长度大于一，
+        if ($pass.val().length > 1 && $repass.val() == $pass.val()) {
+            $pass.removeClass('invalid_field');
+            $repass.removeClass('invalid_field');
+        } else {
+            //错误，error+1
+            createErrTult('Error! Wrong password!', $pass);
+            error++;
+        }
+
+        var phoneRegex = /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
+        //校验正则
+        if (!phoneRegex.test($phone.val())) {
+            createErrTult("Error! Wrong phone!", $phone);
+            error++;
+            //不对，error+1；
+        }
+        if ($gender.val() != 1 && $gender.val() != 2) {
+            createErrTult("Error! Wrong gender!", $gender);
+            error++;
+        }
+        if (error !== 0) {
+            return;
+        }
+
+
+        //禁用登陆按钮，等待结果返回
+        self.find('[type=submit]').attr('disabled', 'disabled');
+        var formInput = self.serializeJSON();
+
+        $.post('/user/register', formInput)
+        //定义获取结果成功的函数
+            .success(data => {
+                alert(data.message);
+                if (data.code !== 200) {
+                    return;
+                }
+                setTimeout(() => {
+                    window.location.href = data.data;
+                }, 300);
+            })
+            //定义网络错误的函数
+            .error(() => alert("网络错误"))
     });
 
 

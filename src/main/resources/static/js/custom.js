@@ -888,3 +888,4 @@ function init_SinglePage() {
                         </form>");
     });
 }
+

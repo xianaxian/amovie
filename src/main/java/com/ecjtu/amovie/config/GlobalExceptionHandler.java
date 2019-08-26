@@ -22,6 +22,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(Exception.class)
     public JsonResult<String> exception(Exception e) {
+        e.printStackTrace();
         log.error(e.getLocalizedMessage());
         String template = "服务器错误:[ %s ]";
         return JsonResult.error(500, String.format(template, e.getLocalizedMessage()));

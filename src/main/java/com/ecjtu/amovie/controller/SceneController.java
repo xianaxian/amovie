@@ -85,7 +85,7 @@ public class SceneController {
      * @param scene 插入的场次的信息，scene的movieName允许填错,scene.seatNum默认为166
      * @return 插入的看结果, 插入成功返回1
      */
-    @PostMapping()
+    @PostMapping("/scense")
     @ResponseBody
     public JsonResult createScene(@RequestBody Scene scene) {
         int i = sceneService.insertOneScene(scene);

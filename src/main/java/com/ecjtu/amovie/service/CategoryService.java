@@ -27,13 +27,13 @@ public class CategoryService {
      * @return 分页的信息
      */
     public Page<Category>  getCategoriesByPage(int pageNum,int pageSize){
-        return PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> categoryRepository.selectAll());
+        return PageHelper.startPage(pageNum, pageSize).doSelectPage(categoryRepository::selectAll);
 
     }
 
     /**
      * 获取全部分类
-     * @return
+     * @return 返回值是查询出的分类的信息
      */
     public List<Category> getCategories(){
         return  categoryRepository.selectAll();
@@ -42,7 +42,7 @@ public class CategoryService {
     /**
      * 获取某个分类
      * @param id 分类的ID
-     * @return
+     * @return 返回值是该分类
      */
     public Category getOneCategory(Integer id){
         return categoryRepository.selectOne(id);
@@ -50,8 +50,8 @@ public class CategoryService {
 
     /**
      * 插入一个分类
-     * @param name
-     * @return
+     * @param name 插入的分类的名字
+     * @return 是否插入成功,插入成功返回1
      */
     public int insertOneCategory(String name){
         Category category=new Category();
@@ -62,7 +62,7 @@ public class CategoryService {
     /**
      * 修改一个分类
      * @param category 修改的分类
-     * @return
+     * @return 更新成功返回1
      */
     public int updateOneCategory(Category category){
         return categoryRepository.updateOne(category);

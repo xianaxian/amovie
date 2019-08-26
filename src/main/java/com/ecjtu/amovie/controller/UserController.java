@@ -1,9 +1,11 @@
 package com.ecjtu.amovie.controller;
 
+import com.ecjtu.amovie.from.RegisterUserFrom;
 import com.ecjtu.amovie.entity.User;
 import com.ecjtu.amovie.service.UserService;
 import com.ecjtu.amovie.utils.MD5Utils;
 import com.ecjtu.amovie.utils.result.JsonResult;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,24 +18,24 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @RequestMapping("/isEmailExit")
-    public void isEmailExit(@RequestParam("email") String email) {
-        boolean emailExit = userService.isEmailExists(email);
-        System.out.println();
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
+
+    @ResponseBody
     @RequestMapping("/register")
-    public void register(@RequestParam("user") User user) {
-        if (userService.isEmailExists(user.getEmail())) {
-            return;
+    public JsonResult<String> register(RegisterUserFrom rUser) {
+        User user=new User();
+        BeanUtils.copyProperties(rUser, user);
+        int i = userService.register(user);
+        if (i==1){
+            return JsonResult.success("注册成功","/");
+        }else {
+            return JsonResult.error(400,"注册失败");
         }
-        String salt = MD5Utils.getSalt();
-        user.setSalt(salt);
-        user.setPassword(MD5Utils.md5(user.getPassword(), salt));
-        int i = userService.saveOne(user);
     }
 
     @ResponseBody

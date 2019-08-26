@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -76,8 +77,14 @@ public interface MovieRepository {
 
     int insertCategories(@Param("movieId") Integer movieId, @Param("ids") List<Integer> ids);
 
+    /**
+     * 删除某个电影的所有分裂
+     * @param movieId 电影的id
+     * @return 返回是否删除成功
+     */
     @Delete("DELETE FROM movie_category WHERE movie_id = #{id}")
     int deleteCategories(Integer movieId);
 
+    List<Movie> selectByCondition(Map<String,Object> conditions);
 
 }

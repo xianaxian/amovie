@@ -13,6 +13,8 @@ spring:
     encoding:
       force: true
       charset: utf-8
+  mvc:
+    static-path-pattern: /**
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

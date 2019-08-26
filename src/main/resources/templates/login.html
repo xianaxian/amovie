@@ -40,7 +40,7 @@
             <button type="submit" class="btn btn-md btn--warning btn--wider">
                 登录
             </button>
-            <a href="#" class="login__tracker form__tracker">忘记密码?</a>
+            <a href="register.html" class="login__tracker form__tracker">没有账号,点击注册</a>
         </div>
     </form>
 
@@ -48,7 +48,8 @@
 </div>
 
 <div th:replace="~{/fragment/common-fragment :: footer}"></div>
-
+<!-- open/close -->
+<div th:replace="~{/fragment/common-fragment :: pop}"></div>
 <!-- JavaScript-->
 <div th:replace="~{/fragment/common-fragment :: script}"></div>
 </body>

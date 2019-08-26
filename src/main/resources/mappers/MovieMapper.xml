@@ -105,6 +105,22 @@
             where category_id = #{id})
     </select>
 
+    <select id="selectByCondition" resultMap="movieWithCategoryA" parameterType="com.ecjtu.amovie.entity.Movie">
+        select *
+        from movie
+        <where>
+            <if test="name!=null ">
+                name like CONCAT('%', #{name}, '%')
+            </if>
+            <if test="directors!=null ">
+                directors like CONCAT('%',#{directors},'%')
+            </if>
+            <if test="actors!=null ">
+                actors like CONCAT('%',#{actors},'%')
+            </if>
+        </where>
+    </select>
+
     <insert id="insertCategories">
         INSERT INTO movie_category (movie_id, category_id)
         VALUES

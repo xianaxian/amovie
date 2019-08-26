@@ -25,8 +25,8 @@ public class MovieController {
     /**
      * 获取电影列表
      *
-     * @param pageNum
-     * @param pageSize
+     * @param pageNum 页码
+     * @param pageSize 页每页大小
      * @return
      */
     @GetMapping
@@ -127,4 +127,7 @@ public class MovieController {
         }
         return result;
     }
+
+
+
 }
