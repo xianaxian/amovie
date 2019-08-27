@@ -25,7 +25,6 @@ public class Scene {
     /**
      * 每场固定166个座位
      */
-    @JsonIgnore
     private final Integer seatNum = 166;
     private String showtime;
     private String bookedSeat;

@@ -16,5 +16,6 @@ import java.util.Date;
 public class News {
     private Integer id;
     private String content;
+    private String title;
     private Date createTime;
 }

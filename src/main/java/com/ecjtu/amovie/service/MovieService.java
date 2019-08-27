@@ -94,6 +94,9 @@ public class MovieService {
         return movieRepository.deleteOne(id);
     }
 
+    public List<Movie> selectReleased(){
+         return movieRepository.selectReleased();
+    }
 
     /**
      * 没有测试

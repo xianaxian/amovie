@@ -1,12 +1,9 @@
-package com.ecjtu.amovie.controller;
+package com.ecjtu.amovie.controller.api;
 
-import com.ecjtu.amovie.entity.Category;
 import com.ecjtu.amovie.entity.News;
-import com.ecjtu.amovie.repository.NewsRepository;
 import com.ecjtu.amovie.service.NewsService;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +11,10 @@ import org.springframework.web.bind.annotation.*;
 /**
  * @author xianaixan
  */
+@CrossOrigin
 @Controller
-@RequestMapping("/news")
-public class NewsController {
+@RequestMapping("/api/news")
+public class apiNewsController {
     @Autowired
     private NewsService newsService;
 
@@ -24,14 +22,13 @@ public class NewsController {
     /**
      * 获取资讯列表
      *
-     * @param pageNum 页码
-     * @param pageSize 每页大小
-     * @return Json数据
+     * @param pageNum
+     * @param pageSize
+     * @return
      */
     @GetMapping
     @ResponseBody
-    public JsonResult news(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+    public JsonResult news(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum, @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
         Page<News> news = newsService.getNewsByPage(pageNum, pageSize);
         return JsonResult.success("查询电影类别成功", news.toPageInfo());
     }
@@ -39,8 +36,8 @@ public class NewsController {
     /**
      * 获取资讯
      *
-     * @param id 咨询id
-     * @return Json数据
+     * @param id
+     * @return
      */
     @GetMapping("/{id}")
     @ResponseBody
@@ -58,8 +55,8 @@ public class NewsController {
     /**
      * 创建资讯
      *
-     * @param news 资讯
-     * @return 返回JSON数据
+     * @param news
+     * @return
      */
     @PostMapping()
     @ResponseBody

@@ -1,25 +1,25 @@
-package com.ecjtu.amovie.controller;
+package com.ecjtu.amovie.controller.api;
 
 import com.ecjtu.amovie.entity.Movie;
 import com.ecjtu.amovie.service.MovieService;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.Page;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
 /**
  * @author xianaixan
  */
+@CrossOrigin
 @Controller
-@RequestMapping("/movies")
-public class MovieController {
+@RequestMapping("/api/movies")
+public class apiMovieController {
     private final MovieService movieService;
 
-    public MovieController(MovieService movieService) {
+
+    public apiMovieController(MovieService movieService) {
         this.movieService = movieService;
     }
 
@@ -30,25 +30,25 @@ public class MovieController {
      * @param pageSize 页每页大小
      * @return
      */
-/*    @GetMapping
-    @ResponseBody
-    public JsonResult news(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "2") Integer pageSize) {
-        Page<Movie> movies = movieService.getMoviesByPage(pageNum, pageSize);
-        return JsonResult.success("查询电影类别成功", movies.toPageInfo());
-    }*/
-
     @GetMapping
     @ResponseBody
+    public JsonResult news(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                           @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+        Page<Movie> movies = movieService.getMoviesByPage(pageNum, pageSize);
+        return JsonResult.success("查询电影类别成功", movies.toPageInfo());
+    }
+
+/*    @GetMapping
+    @ResponseBody
     public ModelAndView getList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-                             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+                             @RequestParam(name = "pageSize", required = false, defaultValue = "2") Integer pageSize) {
         Page<Movie> movies = movieService.getMoviesByPage(pageNum, pageSize);
         ModelAndView mav=new ModelAndView();
         mav.addObject("movies",movies);
         mav.setViewName("movie-list");
 
         return mav;
-    }
+    }*/
 
     /**
      * 获取电影信息
@@ -140,6 +140,14 @@ public class MovieController {
         return result;
     }
 
-
+    @GetMapping("/released")
+    @ResponseBody
+    public JsonResult getReleased() {
+        List<Movie> movies = movieService.selectReleased();
+        if (movies!=null){
+           return JsonResult.success("查询上映的电影成功",movies);
+        }
+        return JsonResult.error(404,"查询上映的电影失败");
+    }
 
 }

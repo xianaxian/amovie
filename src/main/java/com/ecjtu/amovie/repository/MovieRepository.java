@@ -46,6 +46,9 @@ public interface MovieRepository {
     List<Movie> selectAll();
 
 
+    List<Movie> selectReleased();
+
+
     /**
      * 没有使用
      *

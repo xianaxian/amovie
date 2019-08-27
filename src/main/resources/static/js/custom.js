@@ -889,3 +889,7 @@ function init_SinglePage() {
     });
 }
 
+function getCategoryList() {
+    var select_item=$('select[name=select_item]').val();
+
+}

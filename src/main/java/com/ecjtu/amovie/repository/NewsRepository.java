@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public interface NewsRepository {
 
-    @Insert("INSERT INTO news (content, create_time) VALUES (#{content},#{createTime})")
+    @Insert("INSERT INTO news (title,content, create_time) VALUES (#{title},#{content},#{createTime})")
     int saveOne(News news);
 
     @Delete("DELETE FROM news WHERE id = #{id}")

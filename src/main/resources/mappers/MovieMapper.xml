@@ -121,6 +121,11 @@
         </where>
     </select>
 
+    <select id="selectReleased" resultMap="movieWithCategoryA" >
+        select * from movie
+        where status=1
+    </select>
+
     <insert id="insertCategories">
         INSERT INTO movie_category (movie_id, category_id)
         VALUES
