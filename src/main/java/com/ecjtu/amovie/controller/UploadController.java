@@ -2,6 +2,11 @@ package com.ecjtu.amovie.controller;
 
 import com.ecjtu.amovie.entity.Scene;
 import com.ecjtu.amovie.utils.result.JsonResult;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.validation.constraints.NotNull;
 import java.io.File;
@@ -25,18 +29,29 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/api")
 public class UploadController {
-//    DispatcherServlet
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    class Image{
+        private String url;
+    }
 
     private static final String UPLOAD_DIR = "D:/upload/";
 
     @ResponseBody
     @RequestMapping("/upload")
-    public JsonResult<String> upload(@NotNull MultipartFile file) throws IOException {
-        String newFileName = newFileName(file);
-        checkDirExists(UPLOAD_DIR);
-        File newFile = new File(UPLOAD_DIR + newFileName);
-        file.transferTo(newFile);
-        return JsonResult.success("上传成功", "/static/file/" + newFileName);
+    public JsonResult upload(@NotNull MultipartFile file)  {
+        try {
+            String newFileName = newFileName(file);
+            checkDirExists(UPLOAD_DIR);
+            File newFile = new File(UPLOAD_DIR + newFileName);
+            file.transferTo(newFile);
+            Image image=new Image("/file/" + newFileName);
+            return JsonResult.success("上传成功", image);
+        } catch (IOException e) {
+            throw new RuntimeException("上传文件失败");
+        }
     }
 
 

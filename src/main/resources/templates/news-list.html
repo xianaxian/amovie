@@ -14,32 +14,42 @@
 
                 <h2 class="page-heading">资讯</h2>
 
-                <!-- News post article-->
-                <article class="post post--news">
-                    <a href='news.html' class="post__image-link">
-                        <img alt='' src="http://placehold.it/1600x600">
-                    </a>
+                <div th:each="n:${news}">
+                    <!-- News post article-->
+                    <article class="post post--news">
 
-                    <h1><a href="single-page-full.html" class="post__title-link">Donec eu mollis augue, ut egestas
-                        leo</a></h1>
-                    <p class="post__date">29 October 2013 </p>
+                        <h1><a href="single-page-full.html" class="post__title-link" th:href="@{/news/(${n.id})}" th:text="${n.title}"></a></h1>
+                        <p class="post__date" th:text="${n.createTime}"> </p>
 
-                    <div class="wave-devider"></div>
+                        <div class="wave-devider"></div>
 
-                    <p class="post__text">Mauris gravida ipsum vitae libero molestie eget dignissim ipsum egestas.
-                        Quisque in eros id velit molestie placerat a ut arcu. Etiam consequat, turpis ac commodo
-                        rhoncus, justo enim consequat tortor, vitae interdum odio tellus at sem. Aliquam lacus quam,
-                        lobortis sed lacus eget, commodo volutpat nunc. Text link sample. Proin accumsan diam vel nulla
-                        ultrices congue.</p>
+                        <p class="post__text" th:text="${n.content}">/p>
 
-                    <div class="devider-huge"></div>
-                </article>
-                <!-- end news post article-->
+                        <div class="devider-huge"></div>
+                    </article>
+                    <!-- end news post article-->
+                </div>
+
 
                 <div class="pagination">
-                    <a href='#' class="pagination__prev">prev</a>
-                    <a href='#' class="pagination__next">next</a>
+                    <span th:if="${news.pageNum eq 1}">
+                        <a th:href="@{/news/(pageNum=${news.pageNum})}" class="pagination__prev">prev</a>
+                    </span>
+                    <span th:if="${news.pageNum gt 1}">
+                        <a th:href="@{/news(pageNum=${news.pageNum}-1)}" class="pagination__prev">prev</a>
+                    </span>
+
+                    <span th:if="${news.pageNum} lt ${news.pages}">
+                        <a th:href="@{/news(pageNum=${news.pageNum}+1)}" class="pagination__next">next</a>
+                    </span>
+
+                    <span th:if="${news.pageNum} eq ${news.pages}">
+                        <a th:href="@{/news(pageNum=${news.pageNum})}" class="pagination__next">next</a>
+                    </span>
                 </div>
+
+
+
 
             </div>
         </div>

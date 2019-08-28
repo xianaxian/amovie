@@ -32,6 +32,7 @@ public class NewsService {
         return PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> newsRepository.selectAll());
     }
 
+
     /**
      * 插入一个咨询
      * @param news 插入的资讯

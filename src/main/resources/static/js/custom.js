@@ -141,7 +141,7 @@ function init_Home() {
     $('.score').raty({
         width: 130,
         score: 0,
-        path: 'images/rate/',
+        path: '/images/rate/',
         starOff: 'star-off.svg',
         starOn: 'star-on.svg'
     });
@@ -754,7 +754,7 @@ function init_MovieList() {
         half: true,
         readOnly: true,
         noRatedMsg: '您还没评分！',
-        path: 'images/rate/',
+        path: '/images/rate/',
         starOff: 'star-off.svg',
         starOn: 'star-on.svg'
     });
@@ -806,7 +806,7 @@ function init_MoviePage() {
     $('.score').raty({
         width: 130,
         score: 5,
-        path: 'images/rate/',
+        path: '/images/rate/',
         starOff: 'star-off.svg',
         starOn: 'star-on.svg'
     });
@@ -859,7 +859,7 @@ function init_Rates() {
     $('.score').raty({
         width: 130,
         score: 0,
-        path: 'images/rate/',
+        path: '/images/rate/',
         starOff: 'star-off.svg',
         starOn: 'star-on.svg'
     });

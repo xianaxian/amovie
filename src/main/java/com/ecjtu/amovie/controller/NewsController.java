@@ -8,8 +8,11 @@ import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.mustache.MustacheTemplateAvailabilityProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.SmartView;
 
 /**
  * @author xianaixan
@@ -30,10 +33,13 @@ public class NewsController {
      */
     @GetMapping
     @ResponseBody
-    public JsonResult news(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-                           @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
+    public ModelAndView news(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
         Page<News> news = newsService.getNewsByPage(pageNum, pageSize);
-        return JsonResult.success("查询电影类别成功", news.toPageInfo());
+        ModelAndView mav= new ModelAndView();
+        mav.addObject("news", news);
+        mav.setViewName("news-list");
+        return mav;
     }
 
     /**
@@ -43,16 +49,12 @@ public class NewsController {
      * @return Json数据
      */
     @GetMapping("/{id}")
-    @ResponseBody
-    public JsonResult news(@PathVariable("id") Integer id) {
-        News news = newsService.getOneNews(id);
-        JsonResult<Object> result;
-        if (news == null) {
-            result = JsonResult.error(404, "没有找到资讯");
-        } else {
-            result = JsonResult.success("查询该资讯成功", news);
-        }
-        return result;
+    public ModelAndView getANews(@PathVariable("id") Integer id) {
+        News aNews = newsService.getOneNews(id);
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("news");
+        mav.addObject("aNew",aNews);
+        return mav;
     }
 
     /**
@@ -74,48 +76,4 @@ public class NewsController {
         return result;
     }
 
-
-    /**
-     * 更新资讯
-     *
-     * @param id
-     * @param news
-     * @return
-     */
-    @PutMapping("/{id}")
-    @ResponseBody
-    public JsonResult news(@PathVariable Integer id, @RequestBody News news) {
-        News find = newsService.getOneNews(id);
-        JsonResult result;
-        if (find == null) {
-            result = JsonResult.error(404, "没有找到该资讯");
-        } else {
-            news.setId(id);
-            int i = newsService.updateOneNews(news);
-            if (i == 1) {
-                result = JsonResult.success("修改资讯成功", null);
-            } else {
-                result = JsonResult.error(400, "修改资讯失败");
-            }
-        }
-        return result;
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseBody
-    public JsonResult delNews(@PathVariable("id") Integer id) {
-        News find = newsService.getOneNews(id);
-        JsonResult result;
-        if (find == null) {
-            result = JsonResult.error(404, "没有找到该资讯");
-        } else {
-            int i = newsService.deleteOneNews(id);
-            if (i == 1) {
-                result = JsonResult.success("删除资讯成功", null);
-            } else {
-                result = JsonResult.error(400, "删除资讯失败");
-            }
-        }
-        return result;
-    }
 }

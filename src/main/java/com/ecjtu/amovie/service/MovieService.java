@@ -35,6 +35,9 @@ public class MovieService {
         return PageHelper.startPage(pageNum, pageSize).doSelectPage(movieRepository::selectAll);
     }
 
+    public Page<Movie> getMoviesByPage(int pageNum, int pageSize,int category) {
+        return PageHelper.startPage(pageNum, pageSize).doSelectPage(()->movieRepository.selectByCategory(category));
+    }
 
     /**
      * 获取某个电影

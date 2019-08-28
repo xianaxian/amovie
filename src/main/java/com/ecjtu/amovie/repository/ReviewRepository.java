@@ -31,4 +31,7 @@ public interface ReviewRepository {
     @Select("SELECT * FROM review")
     List<Review> selectAll();
 
+    @Select("select * from review where movie_id=#{movieId} ")
+    List<Review> selectByMovie(int movieId);
+
 }
