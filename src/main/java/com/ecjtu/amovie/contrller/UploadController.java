@@ -1,4 +1,4 @@
-package com.ecjtu.amovie.controller;
+package com.ecjtu.amovie.contrller;
 
 import com.ecjtu.amovie.entity.Scene;
 import com.ecjtu.amovie.utils.result.JsonResult;

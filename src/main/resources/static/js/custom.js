@@ -825,7 +825,39 @@ function init_MoviePage() {
 
     });
 
+
+    $('.comment-form__btn').click(function () {
+        var error = 0;
+        var $userId=$("#form-user-id").val();
+        var $movieId=$("#form-movie-id").val();
+        var $content=$(".comment-form__text").val();
+        // var $user_id = self.find('[id=form-user-id]').val();
+        var data={
+            userId:$userId,
+            movieId:$movieId,
+            content:$content
+        }
+        $.ajax({
+            url:'/movies/review',
+            method:'POST',
+            contentType:'application/json;charset=utf-8',
+            dataType:'json',
+            data:JSON.stringify(data),
+            success:function (data) {
+                console.log(data);
+                if (data.code==200){
+                    alert("发表评论成功");
+                    document.location.reload();
+                }
+            }
+        })
+    });
+
+
+
     //6. Reply comment form
+
+
     //reply comment function
     $('.comment__reply').click(function (e) {
         e.preventDefault();
@@ -866,12 +898,15 @@ function init_Rates() {
 
     //After rate callback
     $('.score').click(function () {
+        var score=$('.score').raty('score');
+        alert(score);
         $(this).html('<span class="rates__done">感谢您的评分<span>')
     })
 }
 
 function init_SinglePage() {
     "use strict";
+
 
     //2. Comment area control
 
@@ -888,6 +923,7 @@ function init_SinglePage() {
                         </form>");
     });
 }
+
 
 function getCategoryList() {
     var select_item=$('select[name=select_item]').val();

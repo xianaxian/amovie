@@ -4,6 +4,7 @@ import com.ecjtu.amovie.entity.Movie;
 import com.ecjtu.amovie.repository.MovieRepository;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +32,12 @@ public class MovieService {
      * @param pageSize 每页的大小
      * @return 分页的信息
      */
-    public Page<Movie> getMoviesByPage(int pageNum, int pageSize) {
-        return PageHelper.startPage(pageNum, pageSize).doSelectPage(movieRepository::selectAll);
+    public PageInfo<Movie> getMoviesByPage(int pageNum, int pageSize) {
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(movieRepository::selectAll);
     }
 
-    public Page<Movie> getMoviesByPage(int pageNum, int pageSize,int category) {
-        return PageHelper.startPage(pageNum, pageSize).doSelectPage(()->movieRepository.selectByCategory(category));
+    public PageInfo<Movie> getMoviesByPage(int pageNum, int pageSize, int category) {
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(()->movieRepository.selectByCategory(category));
     }
 
     /**

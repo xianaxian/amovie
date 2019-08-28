@@ -1,4 +1,4 @@
-package com.ecjtu.amovie.controller;
+package com.ecjtu.amovie.contrller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping
 public class RouterController {
-//    @RequestMapping("/login.html")
-//    public String login(){
-//        return "login";
-//    }
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+    @RequestMapping("/register")
+    public String register(){
+        return "register";
+    }
 //    @GetMapping("/news.html")
 //    public String news(){
 //        return "news";
@@ -51,11 +55,15 @@ public class RouterController {
 //        return "book3-buy";
 //    }
 //
-//    @GetMapping("/watchlist.html")
-//    public String watchlist(){
-//        return "watchlist";
-//    }
-//
+    @GetMapping("/watchlist")
+    public String watchlist(){
+        return "watchlist";
+    }
+
+    @GetMapping("/rate")
+    public String rate(){
+        return "rate";
+    }
 //    @GetMapping("/ticket.html")
 //    public String ticket(){
 //        return "ticket";

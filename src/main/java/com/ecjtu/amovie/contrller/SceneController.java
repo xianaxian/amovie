@@ -1,4 +1,4 @@
-package com.ecjtu.amovie.controller;
+package com.ecjtu.amovie.contrller;
 
 import com.ecjtu.amovie.entity.Scene;
 import com.ecjtu.amovie.service.SceneService;
@@ -33,8 +33,8 @@ public class SceneController {
     @GetMapping("/scenes")
     @ResponseBody
     public JsonResult scenes(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum, @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-        Page<Scene> scenes = sceneService.getSceneByPage(pageNum, pageSize);
-        return JsonResult.success("查询电影类别成功", scenes.toPageInfo());
+        PageInfo<Scene> scenes = sceneService.getSceneByPage(pageNum, pageSize);
+        return JsonResult.success("查询电影类别成功", scenes);
     }
 
 

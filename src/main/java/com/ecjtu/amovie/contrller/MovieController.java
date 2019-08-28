@@ -1,4 +1,4 @@
-package com.ecjtu.amovie.controller;
+package com.ecjtu.amovie.contrller;
 
 import com.ecjtu.amovie.entity.Movie;
 import com.ecjtu.amovie.entity.Review;
@@ -6,7 +6,9 @@ import com.ecjtu.amovie.entity.Scene;
 import com.ecjtu.amovie.service.MovieService;
 import com.ecjtu.amovie.service.ReviewService;
 import com.ecjtu.amovie.service.SceneService;
+import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,7 +44,7 @@ public class MovieController {
     public ModelAndView getList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                              @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
                               @RequestParam(name = "category", required = false,defaultValue = "0")int categoryId) {
-        Page<Movie> movies;
+        PageInfo<Movie> movies;
         if (categoryId==0){
             movies=movieService.getMoviesByPage(pageNum, pageSize);
         }else {
@@ -50,6 +52,7 @@ public class MovieController {
         }
         ModelAndView mav=new ModelAndView();
         mav.addObject("movies",movies);
+        mav.addObject("category", categoryId);
         mav.setViewName("movie-list");
         return mav;
     }
@@ -71,8 +74,13 @@ public class MovieController {
         mav.setViewName("movie");
         return mav;
     }
-
-
-
-
+    @PostMapping("/review")
+    public JsonResult review(@RequestBody Review review){
+        int i = reviewService.saveReview(review);
+        if (i==1){
+            return JsonResult.success("发表评论成功",null);
+        }else {
+            return JsonResult.error(400,"发表评论失败");
+        }
+    }
 }

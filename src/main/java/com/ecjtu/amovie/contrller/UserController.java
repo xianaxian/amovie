@@ -1,4 +1,4 @@
-package com.ecjtu.amovie.controller;
+package com.ecjtu.amovie.contrller;
 
 import com.ecjtu.amovie.from.RegisterUserFrom;
 import com.ecjtu.amovie.entity.User;

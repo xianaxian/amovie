@@ -6,6 +6,7 @@ import com.ecjtu.amovie.repository.MovieRepository;
 import com.ecjtu.amovie.repository.SceneRepository;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +34,8 @@ public class SceneService {
      * @return 查询到已经分页的数据
      */
 
-    public Page<Scene> getSceneByPage(int pageNum, int pageSize){
-        return PageHelper.startPage(pageNum, pageSize).doSelectPage(() ->sceneRepository.selectAll());
+    public PageInfo<Scene> getSceneByPage(int pageNum, int pageSize){
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() ->sceneRepository.selectAll());
     }
 
     /**

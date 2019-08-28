@@ -1,32 +1,27 @@
-package com.ecjtu.amovie.controller;
+package com.ecjtu.amovie.api.controller;
 
 import com.ecjtu.amovie.entity.Category;
 import com.ecjtu.amovie.service.CategoryService;
-import com.ecjtu.amovie.utils.Json;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**
  * @author xianaixan
  */
+@CrossOrigin
 @Controller
-@RequestMapping("/categories")
-public class CategoryController {
+@RequestMapping("/api/categories")
+public class apiCategoryController {
     private final CategoryService categoryService;
 
-    public CategoryController(CategoryService categoryService) {
+    public apiCategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
@@ -35,17 +30,16 @@ public class CategoryController {
      * @param response
      * @return
      */
-    @GetMapping("/categoriesAll")
+    @GetMapping("/all")
     @ResponseBody
     public JsonResult<List<Category>> categories(HttpServletResponse response){
         List<Category> categories = categoryService.getCategories();
         JsonResult<List<Category>> result=JsonResult.success("查询电影分类成功",categories);
         return result;
-
     }
 
     /**
-     * 查询电影类别列表
+     * 我是分页了的
      *
      * @param pageNum 页码
      * @param pageSize 每页的大小
@@ -54,8 +48,8 @@ public class CategoryController {
     @ResponseBody
     public JsonResult<PageInfo<Category>> categories(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                                      @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-        Page<Category> categories = categoryService.getCategoriesByPage(pageNum, pageSize);
-        return JsonResult.success("查询电影类别成功", categories.toPageInfo());
+        PageInfo<Category> categories = categoryService.getCategoriesByPage(pageNum, pageSize);
+        return JsonResult.success("查询电影类别成功", categories);
     }
 
     @GetMapping("/{id}")

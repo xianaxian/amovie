@@ -20,4 +20,7 @@ public class ReviewService {
     public List<Review> getMoviesReview(Integer moviesId){
         return reviewRepository.selectByMovie(moviesId);
     }
+    public int saveReview(Review review){
+        return reviewRepository.saveOne(review);
+    }
 }

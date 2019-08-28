@@ -1,4 +1,4 @@
-package com.ecjtu.amovie.controller;
+package com.ecjtu.amovie.contrller;
 
 import com.ecjtu.amovie.entity.Category;
 import com.ecjtu.amovie.entity.News;
@@ -35,7 +35,7 @@ public class NewsController {
     @ResponseBody
     public ModelAndView news(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                              @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-        Page<News> news = newsService.getNewsByPage(pageNum, pageSize);
+        PageInfo<News> news = newsService.getNewsByPage(pageNum, pageSize);
         ModelAndView mav= new ModelAndView();
         mav.addObject("news", news);
         mav.setViewName("news-list");

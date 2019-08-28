@@ -100,7 +100,10 @@
 
                 <h2 class="page-heading" >评论 (<span th:text="${reviews.size()}"></span>)</h2>
                 <div class="comment-wrapper">
-                    <form id="comment-form" class="comment-form" method="post">
+                    <div  th:if="${session.user != null}" >
+                    <form id="comment-form" class="comment-form">
+                        <input type="hidden"id="form-movie-id" name="form-movie-id" th:value="${movie.id}" />
+                        <input type="hidden" id="form-user-id" th:value="${session.user.id}" />
                 <textarea
                         class="comment-form__text"
                         placeholder="发表您的评论吧"
@@ -112,7 +115,7 @@
                             发表评论
                         </button>
                     </form>
-
+                    </div>
                     <div class="comment-sets">
                         <div th:each="r:${reviews}">
                             <!-- 评论 -->
@@ -163,6 +166,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         init_MoviePage();
+        init_Rates();
     });
 </script>
 </body>

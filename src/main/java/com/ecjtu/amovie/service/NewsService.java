@@ -4,6 +4,7 @@ import com.ecjtu.amovie.entity.News;
 import com.ecjtu.amovie.repository.NewsRepository;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,8 @@ public class NewsService {
      * @param pageSize
      * @return
      */
-    public Page<News> getNewsByPage(int pageNum,int pageSize){
-        return PageHelper.startPage(pageNum, pageSize).doSelectPage(() -> newsRepository.selectAll());
+    public PageInfo<News> getNewsByPage(int pageNum, int pageSize){
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> newsRepository.selectAll());
     }
 
 

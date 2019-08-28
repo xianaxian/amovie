@@ -1,9 +1,10 @@
-package com.ecjtu.amovie.controller.api;
+package com.ecjtu.amovie.api.controller;
 
 import com.ecjtu.amovie.entity.Movie;
 import com.ecjtu.amovie.service.MovieService;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +35,8 @@ public class apiMovieController {
     @ResponseBody
     public JsonResult news(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                            @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize) {
-        Page<Movie> movies = movieService.getMoviesByPage(pageNum, pageSize);
-        return JsonResult.success("查询电影类别成功", movies.toPageInfo());
+        PageInfo<Movie> movies = movieService.getMoviesByPage(pageNum, pageSize);
+        return JsonResult.success("查询电影类别成功", movies);
     }
 
 /*    @GetMapping

@@ -73,7 +73,7 @@
                     <span class="tags__label">Sorted by:</span>
                     <ul>
                         <li class="item-wrap">
-                            <a href="#" class="tags__item item-active" data-filter="all"
+                            <a href="/movies" class="tags__item item-active" data-filter="all"
                             >all</a
                             >
                         </li>
@@ -102,7 +102,7 @@
             </div>
 
             <!-- Movie preview item -->
-            <div th:each="m:${movies}" >
+            <div th:each="m:${movies.list}" >
             <div class="movie movie--preview movie--full release">
                 <div class="col-sm-3 col-md-2 col-lg-2">
                     <div class="movie__images">
@@ -169,18 +169,22 @@
             <div class="coloum-wrapper">
                 <div class="pagination paginatioon--full">
                     <span th:if="${movies.pageNum eq 1}">
-                        <a th:href="@{/movies(pageNum=${movies.pageNum})}" class="pagination__prev">prev</a>
+                        <a th:if="${category != null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum},category=${category})}" class="pagination__prev">prev</a>
+                        <a th:if="${category == null  || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum})}" class="pagination__prev">prev</a>
                     </span>
                     <span th:if="${movies.pageNum gt 1}">
-                        <a th:href="@{/movies(pageNum=${movies.pageNum}-1)}" class="pagination__prev">prev</a>
+                        <a th:if="${category !=null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum}-1,category=${category})}" class="pagination__prev">prev</a>
+                        <a th:if="${category ==null || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum}-1)}" class="pagination__prev">prev</a>
                     </span>
 
                     <span th:if="${movies.pageNum} lt ${movies.pages}">
-                        <a th:href="@{/movies(pageNum=${movies.pageNum}+1)}" class="pagination__next">next</a>
+                        <a th:if="${category != null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum}+1,category=${category})}" class="pagination__next">next</a>
+                        <a th:if="${category == null || category eq 0 }" th:href="@{/movies(pageNum=${movies.pageNum}+1)}" class="pagination__next">next</a>
                     </span>
 
                     <span th:if="${movies.pageNum} eq ${movies.pages}">
-                        <a th:href="@{/movies(pageNum=${movies.pageNum})}" class="pagination__next">next</a>
+                        <a th:if="${category != null and  category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum},category=${category})}" class="pagination__next">next</a>
+                        <a th:if="${category == null || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum})}" class="pagination__next">next</a>
                     </span>
                 </div>
             </div>
