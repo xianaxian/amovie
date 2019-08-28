@@ -91,7 +91,7 @@
             <div class="auth auth--home">
                 <div class="auth__show">
                 </div>
-                  <!--/*@thymesVar id="user" type="com.ecjtu.amovie.entity.User"*/-->
+                <!--/*@thymesVar id="user" type="com.ecjtu.amovie.api.entity.User"*/-->
                   <div th:if="${session.user!=null}">
                       <a href="#" class="btn btn--sign btn--singin"><span th:text="${session.user.nickname}"> </span></a>
                       <ul class="auth__function">

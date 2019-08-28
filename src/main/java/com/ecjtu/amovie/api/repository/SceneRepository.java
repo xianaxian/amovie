@@ -1,14 +1,12 @@
-package com.ecjtu.amovie.repository;
+package com.ecjtu.amovie.api.repository;
 
-import com.ecjtu.amovie.entity.Scene;
+import com.ecjtu.amovie.api.entity.Scene;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.ListResourceBundle;
 
 /**
  * 没测试

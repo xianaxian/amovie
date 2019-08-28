@@ -1,4 +1,4 @@
-package com.ecjtu.amovie.entity;
+package com.ecjtu.amovie.api.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

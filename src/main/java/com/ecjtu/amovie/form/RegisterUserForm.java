@@ -1,4 +1,4 @@
-package com.ecjtu.amovie.from;
+package com.ecjtu.amovie.form;
 
 import lombok.Data;
 
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
  * 用户注册时的数据
  */
 @Data
-public class RegisterUserFrom {
+public class RegisterUserForm {
 
     @Email(message = "请输入正确的邮箱格式")
     @NotBlank(message = "邮箱不能为空")

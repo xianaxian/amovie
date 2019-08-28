@@ -1,11 +1,9 @@
-package com.ecjtu.amovie.service;
+package com.ecjtu.amovie.api.service;
 
-import com.ecjtu.amovie.entity.Category;
-import com.ecjtu.amovie.repository.CategoryRepository;
-import com.github.pagehelper.Page;
+import com.ecjtu.amovie.api.entity.Category;
+import com.ecjtu.amovie.api.repository.CategoryRepository;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @author xianaixan
  */
 @SpringBootApplication
-@MapperScan("com.ecjtu.amovie.repository")
+@MapperScan("com.ecjtu.amovie.api.repository")
 public class AmovieApplication {
 
     public static void main(String[] args) {

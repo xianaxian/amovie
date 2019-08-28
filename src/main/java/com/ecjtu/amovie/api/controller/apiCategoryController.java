@@ -1,9 +1,8 @@
 package com.ecjtu.amovie.api.controller;
 
-import com.ecjtu.amovie.entity.Category;
-import com.ecjtu.amovie.service.CategoryService;
+import com.ecjtu.amovie.api.entity.Category;
+import com.ecjtu.amovie.api.service.CategoryService;
 import com.ecjtu.amovie.utils.result.JsonResult;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;

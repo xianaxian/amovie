@@ -1,4 +1,4 @@
-package com.ecjtu.amovie.entity;
+package com.ecjtu.amovie.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,7 @@
-package com.ecjtu.amovie.service;
+package com.ecjtu.amovie.api.service;
 
-import com.ecjtu.amovie.entity.Review;
-import com.ecjtu.amovie.repository.ReviewRepository;
+import com.ecjtu.amovie.api.entity.Review;
+import com.ecjtu.amovie.api.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.ecjtu.amovie.repository;
+package com.ecjtu.amovie.api.repository;
 
-import com.ecjtu.amovie.entity.News;
+import com.ecjtu.amovie.api.entity.News;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;

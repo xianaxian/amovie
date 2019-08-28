@@ -1,10 +1,8 @@
-package com.ecjtu.amovie.service;
+package com.ecjtu.amovie.api.service;
 
-import com.ecjtu.amovie.config.GlobalExceptionHandler;
-import com.ecjtu.amovie.entity.User;
-import com.ecjtu.amovie.repository.UserRepository;
+import com.ecjtu.amovie.api.entity.User;
+import com.ecjtu.amovie.api.repository.UserRepository;
 import com.ecjtu.amovie.utils.MD5Utils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**

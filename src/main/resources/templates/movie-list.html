@@ -175,7 +175,7 @@
                     <span th:if="${movies.pageNum gt 1}">
                         <a th:if="${category !=null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum}-1,category=${category})}" class="pagination__prev">prev</a>
                         <a th:if="${category ==null || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum}-1)}" class="pagination__prev">prev</a>
-                    </span>
+                    </span>1
 
                     <span th:if="${movies.pageNum} lt ${movies.pages}">
                         <a th:if="${category != null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum}+1,category=${category})}" class="pagination__next">next</a>

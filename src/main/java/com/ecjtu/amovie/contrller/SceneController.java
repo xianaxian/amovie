@@ -1,11 +1,9 @@
 package com.ecjtu.amovie.contrller;
 
-import com.ecjtu.amovie.entity.Scene;
-import com.ecjtu.amovie.service.SceneService;
+import com.ecjtu.amovie.api.entity.Scene;
+import com.ecjtu.amovie.api.service.SceneService;
 import com.ecjtu.amovie.utils.result.JsonResult;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

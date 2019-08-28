@@ -1,6 +1,6 @@
-package com.ecjtu.amovie.repository;
+package com.ecjtu.amovie.api.repository;
 
-import com.ecjtu.amovie.entity.Movie;
+import com.ecjtu.amovie.api.entity.Movie;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

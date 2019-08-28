@@ -1,12 +1,11 @@
 package com.ecjtu.amovie.contrller;
 
-import com.ecjtu.amovie.from.RegisterUserFrom;
-import com.ecjtu.amovie.entity.User;
-import com.ecjtu.amovie.service.UserService;
+import com.ecjtu.amovie.api.entity.User;
+import com.ecjtu.amovie.api.service.UserService;
+import com.ecjtu.amovie.form.RegisterUserForm;
 import com.ecjtu.amovie.utils.MD5Utils;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +26,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/register")
-    public JsonResult<String> register(RegisterUserFrom rUser) {
+    public JsonResult<String> register(RegisterUserForm rUser) {
         User user=new User();
         BeanUtils.copyProperties(rUser, user);
         int i = userService.register(user);

@@ -1,12 +1,11 @@
-package com.ecjtu.amovie.repository;
+package com.ecjtu.amovie.api.repository;
 
 
-import com.ecjtu.amovie.entity.User;
+import com.ecjtu.amovie.api.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * @author xianaixan

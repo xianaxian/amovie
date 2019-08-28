@@ -1,21 +1,14 @@
 package com.ecjtu.amovie.contrller;
 
-import com.ecjtu.amovie.entity.Category;
-import com.ecjtu.amovie.service.CategoryService;
-import com.ecjtu.amovie.utils.Json;
+import com.ecjtu.amovie.api.entity.Category;
+import com.ecjtu.amovie.api.service.CategoryService;
 import com.ecjtu.amovie.utils.result.JsonResult;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**

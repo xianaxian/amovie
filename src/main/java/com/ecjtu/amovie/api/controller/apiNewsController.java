@@ -1,9 +1,8 @@
 package com.ecjtu.amovie.api.controller;
 
-import com.ecjtu.amovie.entity.News;
-import com.ecjtu.amovie.service.NewsService;
+import com.ecjtu.amovie.api.entity.News;
+import com.ecjtu.amovie.api.service.NewsService;
 import com.ecjtu.amovie.utils.result.JsonResult;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
