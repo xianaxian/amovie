@@ -4,6 +4,7 @@ import com.ecjtu.amovie.api.entity.Review;
 import com.ecjtu.amovie.api.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,7 @@ public class ReviewService {
         return reviewRepository.selectByMovie(moviesId);
     }
     public int saveReview(Review review){
+        review.setCreateTime(new Date());
         return reviewRepository.saveOne(review);
     }
 }

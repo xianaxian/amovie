@@ -88,6 +88,11 @@ public interface MovieRepository {
     @Delete("DELETE FROM movie_category WHERE movie_id = #{id}")
     int deleteCategories(Integer movieId);
 
+    /**
+     * 根据条件查询
+     * @param conditions 条件
+     * @return 查询出的list
+     */
     List<Movie> selectByCondition(Map<String,Object> conditions);
 
 }

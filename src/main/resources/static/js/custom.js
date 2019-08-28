@@ -796,8 +796,45 @@ function init_MovieList() {
         $('.time-select__item').removeClass('active');
         $(this).addClass('active');
     });
-}
 
+
+}
+function add(movId) {
+    $.ajax({
+        url:'/user/watchlist',
+        method:'POST',
+        dataType:'json',
+        contentType:'application/x-www-form-urlencoded',
+        data:{
+            movieId:movId
+        },
+        success:function (data) {
+            console.log(data);
+            if (data.code==200){
+                alert(data.message);
+                document.location.reload();
+            }
+        }
+    })
+}
+function del(movId) {
+    $.ajax({
+        url:'/user/delWatchlist',
+        method:'POST',
+        dataType:'json',
+        contentType:'application/x-www-form-urlencoded',
+        data:{
+            movieId:movId
+        },
+        success:function (data) {
+            console.log(data);
+            if (data.code==200){
+                alert(data.message);
+                document.location.reload();
+            }
+        }
+    })
+}
 function init_MoviePage() {
     "use strict";
 

@@ -3,15 +3,19 @@ package com.ecjtu.amovie.contrller;
 import com.ecjtu.amovie.api.entity.Movie;
 import com.ecjtu.amovie.api.entity.Review;
 import com.ecjtu.amovie.api.entity.Scene;
+import com.ecjtu.amovie.api.entity.User;
 import com.ecjtu.amovie.api.service.MovieService;
 import com.ecjtu.amovie.api.service.ReviewService;
 import com.ecjtu.amovie.api.service.SceneService;
+import com.ecjtu.amovie.api.service.WatchListService;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,11 +27,13 @@ public class MovieController {
     private final MovieService movieService;
     private final SceneService sceneService;
     private final ReviewService reviewService;
+    private final WatchListService watchListService;
 
-    public MovieController(MovieService movieService, SceneService sceneService, ReviewService reviewService) {
+    public MovieController(MovieService movieService, SceneService sceneService, ReviewService reviewService, WatchListService watchListService) {
         this.movieService = movieService;
         this.sceneService = sceneService;
         this.reviewService = reviewService;
+        this.watchListService = watchListService;
     }
 
 
@@ -41,8 +47,9 @@ public class MovieController {
     @GetMapping
     @ResponseBody
     public ModelAndView getList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-                             @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
-                              @RequestParam(name = "category", required = false,defaultValue = "0")int categoryId) {
+                                @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
+                                @RequestParam(name = "category", required = false,defaultValue = "0")int categoryId,
+                                HttpSession session) {
         PageInfo<Movie> movies;
         if (categoryId==0){
             movies=movieService.getMoviesByPage(pageNum, pageSize);
@@ -53,6 +60,16 @@ public class MovieController {
         mav.addObject("movies",movies);
         mav.addObject("category", categoryId);
         mav.setViewName("movie-list");
+        User user = (User) session.getAttribute("user");
+        List<Integer> WLID= Collections.emptyList();
+        if (user!=null){
+            /**
+             * WatchList ID 该用户添加到观看列表的电影的id
+             */
+             WLID = watchListService.selectByUser(user.getId());
+
+        }
+        mav.addObject("WLID", WLID);
         return mav;
     }
 

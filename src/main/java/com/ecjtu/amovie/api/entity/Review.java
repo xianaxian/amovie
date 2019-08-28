@@ -18,6 +18,7 @@ public class Review {
     private String content;
     private Integer movieId;
     private  Integer userId;
+    private String nickname;
     private Date createTime;
 
 }

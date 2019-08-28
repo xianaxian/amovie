@@ -120,7 +120,7 @@
                         <div th:each="r:${reviews}">
                             <!-- 评论 -->
                             <div class="comment">
-                                <a href="#" class="comment__author" th:text="${r.userId}">Roberta Inetti</a>
+                                <a href="#" class="comment__author" th:text="${r.nickname}">Roberta Inetti</a>
                                 <p class="comment__date" th:text="${r.createTime}"></p>
                                 <p class="comment__message" th:text="${r.content}">
                                 </p>

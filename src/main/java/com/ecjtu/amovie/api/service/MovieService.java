@@ -109,4 +109,7 @@ public class MovieService {
     public List<Movie> selectByCondition(Map<String,Object> conditions){
         return movieRepository.selectByCondition(conditions);
     }
+
+
+
 }

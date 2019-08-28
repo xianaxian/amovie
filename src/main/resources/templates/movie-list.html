@@ -148,8 +148,12 @@
 
                     <div class="movie__btns">
                         <a href="#" class="btn btn-md btn--warning">预订此电影</a>
-                        <a href="#" class="watchlist">添加到播放列表</a>
+                        <span th:switch="${WLID.contains(m.id)}">
+                            <a th:case="true" th:onclick="|del(${m.id})|"   class="watchlist removeWatchlist">移除出播放列表</a>
+                            <a th:case="*" th:onclick="|add(${m.id})|" class="watchlist">添加到播放列表</a>
+                        </span>
                     </div>
+
 
                     <div class="preview-footer">
                         <div class="movie__rate">
@@ -175,7 +179,7 @@
                     <span th:if="${movies.pageNum gt 1}">
                         <a th:if="${category !=null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum}-1,category=${category})}" class="pagination__prev">prev</a>
                         <a th:if="${category ==null || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum}-1)}" class="pagination__prev">prev</a>
-                    </span>1
+                    </span>
 
                     <span th:if="${movies.pageNum} lt ${movies.pages}">
                         <a th:if="${category != null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum}+1,category=${category})}" class="pagination__next">next</a>
