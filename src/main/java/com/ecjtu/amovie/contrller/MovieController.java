@@ -8,6 +8,7 @@ import com.ecjtu.amovie.api.service.MovieService;
 import com.ecjtu.amovie.api.service.ReviewService;
 import com.ecjtu.amovie.api.service.SceneService;
 import com.ecjtu.amovie.api.service.WatchListService;
+import com.ecjtu.amovie.form.MovieResult;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
@@ -50,11 +51,11 @@ public class MovieController {
                                 @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
                                 @RequestParam(name = "category", required = false,defaultValue = "0")int categoryId,
                                 HttpSession session) {
-        PageInfo<Movie> movies;
+        PageInfo<MovieResult> movies;
         if (categoryId==0){
-            movies=movieService.getMoviesByPage(pageNum, pageSize);
+            movies=movieService.MoviePageNoLogin(pageNum, pageSize);
         }else {
-            movies=movieService.getMoviesByPage(pageNum, pageSize, categoryId);
+            movies=movieService.MoviePageNoLoginCatetgory(pageNum, pageSize, categoryId);
         }
         ModelAndView mav=new ModelAndView();
         mav.addObject("movies",movies);
@@ -67,7 +68,6 @@ public class MovieController {
              * WatchList ID 该用户添加到观看列表的电影的id
              */
              WLID = watchListService.selectByUser(user.getId());
-
         }
         mav.addObject("WLID", WLID);
         return mav;

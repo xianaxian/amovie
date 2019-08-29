@@ -126,7 +126,7 @@ $(function () {
                 $(successMsg).appendTo(self).hide().delay(300).fadeIn();
 
                 setTimeout(() => {
-                    window.location.href = '/';
+                    window.location.reload();
                 }, 300);
             })
             //定义网络错误的函数

@@ -746,7 +746,7 @@ function init_MovieList() {
 
     //3. Rating scrore init
     //Rating star
-    $('.score').raty({
+/*    $('.score').raty({
         width: 130,
         score: 0,
         number: 5,
@@ -757,7 +757,7 @@ function init_MovieList() {
         path: '/images/rate/',
         starOff: 'star-off.svg',
         starOn: 'star-on.svg'
-    });
+    });*/
 
     //4. Sorting by category
     // sorting function
@@ -810,8 +810,8 @@ function add(movId) {
         },
         success:function (data) {
             console.log(data);
+            alert(data.message);
             if (data.code==200){
-                alert(data.message);
                 document.location.reload();
             }
         }
@@ -828,8 +828,8 @@ function del(movId) {
         },
         success:function (data) {
             console.log(data);
+            alert(data.message);
             if (data.code==200){
-                alert(data.message);
                 document.location.reload();
             }
         }
@@ -902,6 +902,9 @@ function init_MoviePage() {
         $('.comment').find('.comment-form').remove();
         $(this).parent().append("<form id='comment-form' class='comment-form' method='post'>\
                             <textarea class='comment-form__text' placeholder='发表您的评论吧'></textarea>\
+                            <input type='text' id='form-movie-id' name='form-movie-id' th:value='${movie.id}'/>\
+                            <input type='text' id='form-user-id' th:value='${session.user.id}' />\
+                            <input type='text' id='form-parent-id' th:value='0' />\
                             <button type='submit' class='btn btn-md btn--danger comment-form__btn'>发表评论</button>\
                         </form>");
     });
@@ -936,7 +939,26 @@ function init_Rates() {
     //After rate callback
     $('.score').click(function () {
         var score=$('.score').raty('score');
-        alert(score);
+        let m=window.location.href;
+        m=m.substring(m.lastIndexOf('/')+1);
+        var data={
+            movieId:m,
+            score:score
+        }
+        $.ajax({
+            url:'/user/rate',
+            method:'POST',
+            contentType:'application/json;charset=utf-8',
+            dataType:'json',
+            data:JSON.stringify(data),
+            success:function (data) {
+                console.log(data);
+                alert(data.message);
+                if (data.code==200){
+                    document.location.reload();
+                }
+            }
+        })
         $(this).html('<span class="rates__done">感谢您的评分<span>')
     })
 }
@@ -966,3 +988,9 @@ function getCategoryList() {
     var select_item=$('select[name=select_item]').val();
 
 }
+// function rate(id){
+//     var score=$('.score').raty('score');
+//     alert(score);
+//     alert(id)
+//     $(this).html('<span class="rates__done">感谢您的评分<span>')
+// }

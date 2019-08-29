@@ -102,67 +102,68 @@
             </div>
 
             <!-- Movie preview item -->
-            <div th:each="m:${movies.list}" >
-            <div class="movie movie--preview movie--full release">
-                <div class="col-sm-3 col-md-2 col-lg-2">
-                    <div class="movie__images">
-                        <img alt="" th:src="${m.poster}" src="http://placehold.it/380x600"/>
-                    </div>
-                    <!-- 评论数 -->
-<!--                    <div class="movie__feature">-->
-<!--                        <a href="#" class="movie__feature-item movie__feature&#45;&#45;comment">123</a>-->
-<!--                    </div>-->
-                    <div class="movie__feature">
-                        <a th:href="'/movies/'+${m.id}" class="movie__feature-item movie__feature--comment" th:text="${m.name}"></a>
-                    </div>
-                </div>
-
-
-                    <div  class="col-sm-9 col-md-10 col-lg-10 movie__about" >
-                    <a th:href="'/movies/'+${m.id}" class="movie__title link--huge" th:text="${m.name}"
-                    ></a>
-
-                    <p  class="movie__time">
-                        <span th:text="${m.duration}"> </span>Min
-                    </p>
-
-                    <p class="movie__option">
-                        <strong>Country: </strong><a href="#" th:text="${m.country}"></a>
-                    </p>
-                    <p class="movie__option">
-                        <strong>Category: </strong>
-                        <span th:each="c:${m.categories}">
-                            <a th:href="@{/movies(category=${c.id}) }" th:text="${c.name}">eeee</a>
-                        </span>
-                    </p>
-                    <p class="movie__option">
-                        <strong>Release date: </strong><a href="#" th:text="${m.releaseDate}"></a>
-                    </p>
-                    <p class="movie__option">
-                        <strong>Director: </strong><a href="#" th:text="${m.directors}"></a>
-                    </p>
-                    <p class="movie__option">
-                        <strong>Actors: </strong>
-                        <a href="#" th:text="${m.actors}"></a>
-                    </p>
-
-                    <div class="movie__btns">
-                        <a href="#" class="btn btn-md btn--warning">预订此电影</a>
-                        <span th:switch="${WLID.contains(m.id)}">
-                            <a th:case="true" th:onclick="|del(${m.id})|"   class="watchlist removeWatchlist">移除出播放列表</a>
-                            <a th:case="*" th:onclick="|add(${m.id})|" class="watchlist">添加到播放列表</a>
-                        </span>
-                    </div>
-
-
-                    <div class="preview-footer">
-                        <div class="movie__rate">
-                            <div class="score"></div>
-                            <span class="movie__rate-number">170 个评分</span>
-                            <span class="movie__rating">5.0</span>
+            <div th:each="m:${movies.list}">
+                <div class="movie movie--preview movie--full release">
+                    <div class="col-sm-3 col-md-2 col-lg-2">
+                        <div class="movie__images">
+                            <img alt="" th:src="${m.poster}" src="http://placehold.it/380x600"/>
+                        </div>
+                        <!-- 评论数 -->
+                        <!--                    <div class="movie__feature">-->
+                        <!--                        <a href="#" class="movie__feature-item movie__feature&#45;&#45;comment">123</a>-->
+                        <!--                    </div>-->
+                        <div class="movie__feature">
+                            <a th:href="'/movies/'+${m.id}" class="movie__feature-item movie__feature--comment"
+                               th:text="${m.name}"></a>
                         </div>
                     </div>
-                </div>
+
+
+                    <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
+                        <a th:href="'/movies/'+${m.id}" class="movie__title link--huge" th:text="${m.name}"
+                        ></a>
+
+                        <p class="movie__time">
+                            <span th:text="${m.duration}"> </span>Min
+                        </p>
+
+                        <p class="movie__option">
+                            <strong>Country: </strong><a href="#" th:text="${m.country}"></a>
+                        </p>
+                        <p class="movie__option">
+                            <strong>Category: </strong>
+                            <span th:each="c:${m.categories}">
+                            <a th:href="@{/movies(category=${c.id}) }" th:text="${c.name}">eeee</a>
+                        </span>
+                        </p>
+                        <p class="movie__option">
+                            <strong>Release date: </strong><a href="#" th:text="${m.releaseDate}"></a>
+                        </p>
+                        <p class="movie__option">
+                            <strong>Director: </strong><a href="#" th:text="${m.directors}"></a>
+                        </p>
+                        <p class="movie__option">
+                            <strong>Actors: </strong>
+                            <a href="#" th:text="${m.actors}"></a>
+                        </p>
+
+                        <div class="movie__btns" th:if="${session.user!=null}">
+                            <a href="#" class="btn btn-md btn--warning">预订此电影</a>
+                            <span th:switch="${WLID.contains(m.id)}">
+                            <a th:case="true" th:onclick="|del(${m.id})|" class="watchlist removeWatchlist">移除出播放列表</a>
+                            <a th:case="*" th:onclick="|add(${m.id})|" class="watchlist">添加到播放列表</a>
+                        </span>
+                        </div>
+
+
+                        <div class="preview-footer">
+                            <div class="movie__rate">
+                                <div class="score"></div>
+                                <span class="movie__rate-number"><span th:text="${m.num}"></span>个评分</span>
+                                <span class="movie__rating" th:text="${m.score}"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -173,22 +174,34 @@
             <div class="coloum-wrapper">
                 <div class="pagination paginatioon--full">
                     <span th:if="${movies.pageNum eq 1}">
-                        <a th:if="${category != null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum},category=${category})}" class="pagination__prev">prev</a>
-                        <a th:if="${category == null  || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum})}" class="pagination__prev">prev</a>
+                        <a th:if="${category != null and category ne 0}"
+                           th:href="@{/movies(pageNum=${movies.pageNum},category=${category})}"
+                           class="pagination__prev">prev</a>
+                        <a th:if="${category == null  || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum})}"
+                           class="pagination__prev">prev</a>
                     </span>
                     <span th:if="${movies.pageNum gt 1}">
-                        <a th:if="${category !=null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum}-1,category=${category})}" class="pagination__prev">prev</a>
-                        <a th:if="${category ==null || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum}-1)}" class="pagination__prev">prev</a>
+                        <a th:if="${category !=null and category ne 0}"
+                           th:href="@{/movies(pageNum=${movies.pageNum}-1,category=${category})}"
+                           class="pagination__prev">prev</a>
+                        <a th:if="${category ==null || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum}-1)}"
+                           class="pagination__prev">prev</a>
                     </span>
 
                     <span th:if="${movies.pageNum} lt ${movies.pages}">
-                        <a th:if="${category != null and category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum}+1,category=${category})}" class="pagination__next">next</a>
-                        <a th:if="${category == null || category eq 0 }" th:href="@{/movies(pageNum=${movies.pageNum}+1)}" class="pagination__next">next</a>
+                        <a th:if="${category != null and category ne 0}"
+                           th:href="@{/movies(pageNum=${movies.pageNum}+1,category=${category})}"
+                           class="pagination__next">next</a>
+                        <a th:if="${category == null || category eq 0 }"
+                           th:href="@{/movies(pageNum=${movies.pageNum}+1)}" class="pagination__next">next</a>
                     </span>
 
                     <span th:if="${movies.pageNum} eq ${movies.pages}">
-                        <a th:if="${category != null and  category ne 0}" th:href="@{/movies(pageNum=${movies.pageNum},category=${category})}" class="pagination__next">next</a>
-                        <a th:if="${category == null || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum})}" class="pagination__next">next</a>
+                        <a th:if="${category != null and  category ne 0}"
+                           th:href="@{/movies(pageNum=${movies.pageNum},category=${category})}"
+                           class="pagination__next">next</a>
+                        <a th:if="${category == null || category eq 0}" th:href="@{/movies(pageNum=${movies.pageNum})}"
+                           class="pagination__next">next</a>
                     </span>
                 </div>
             </div>
@@ -208,6 +221,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         init_MovieList();
+        /*init_Rates();*/
     });
 </script>
 </body>

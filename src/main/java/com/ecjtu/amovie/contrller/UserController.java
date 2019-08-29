@@ -2,20 +2,22 @@ package com.ecjtu.amovie.contrller;
 
 import com.ecjtu.amovie.api.entity.Movie;
 import com.ecjtu.amovie.api.entity.User;
-import com.ecjtu.amovie.api.service.MovieService;
+import com.ecjtu.amovie.api.service.ScoreService;
 import com.ecjtu.amovie.api.service.UserService;
 import com.ecjtu.amovie.api.service.WatchListService;
+import com.ecjtu.amovie.form.RateForm;
 import com.ecjtu.amovie.form.RegisterUserForm;
 import com.ecjtu.amovie.utils.MD5Utils;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 /**
  * @author xianaixan
@@ -25,10 +27,12 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     private final UserService userService;
     private final WatchListService watchListService;
+    private final ScoreService scoreService;
 
-    public UserController(UserService userService, WatchListService watchListService) {
+    public UserController(UserService userService, WatchListService watchListService, ScoreService scoreService) {
         this.userService = userService;
         this.watchListService = watchListService;
+        this.scoreService = scoreService;
     }
 
 
@@ -64,7 +68,9 @@ public class UserController {
 
 
     @GetMapping("/watchlist")
-    public ModelAndView watchlist(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum, @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize, HttpSession session) {
+    public ModelAndView watchlist(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                                  @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
+                                  HttpSession session) {
         ModelAndView mav = new ModelAndView();
         User user = (User) session.getAttribute("user");
         if (user == null) {
@@ -90,10 +96,9 @@ public class UserController {
         }
         return JsonResult.error(404, "添加失败");
     }
-    @PostMapping("delWatchlist")
+    @PostMapping("/delWatchlist")
     @ResponseBody
     public JsonResult delWatchlist(Integer movieId, HttpSession session) {
-
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return JsonResult.error(401, "你没有登陆");
@@ -105,7 +110,19 @@ public class UserController {
         return JsonResult.error(404, "移除失败");
     }
 
-
+    @PostMapping("/rate")
+    @ResponseBody
+    public JsonResult rate(@Valid @RequestBody RateForm rate, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return JsonResult.error(401, "你没有登陆");
+        }
+        int i = scoreService.insertScore(rate.getMovieId(), user.getId(),rate.getScore() );
+        if (i == 1) {
+            return JsonResult.success("评分成功", null);
+        }
+        return JsonResult.error(404, "评分失败");
+    }
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();

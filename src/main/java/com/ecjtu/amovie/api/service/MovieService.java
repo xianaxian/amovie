@@ -2,6 +2,7 @@ package com.ecjtu.amovie.api.service;
 
 import com.ecjtu.amovie.api.entity.Movie;
 import com.ecjtu.amovie.api.repository.MovieRepository;
+import com.ecjtu.amovie.form.MovieResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -30,12 +31,28 @@ public class MovieService {
      * @param pageSize 每页的大小
      * @return 分页的信息
      */
+//    public PageInfo<Movie> getMoviesByPage(int pageNum, int pageSize) {
+//        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(movieRepository::selectAll);
+//    }
+//
+//    public PageInfo<Movie> getMoviesByPage(int pageNum, int pageSize, int category) {
+//        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(()->movieRepository.selectByCategory(category));
+//    }
+
     public PageInfo<Movie> getMoviesByPage(int pageNum, int pageSize) {
         return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(movieRepository::selectAll);
     }
 
     public PageInfo<Movie> getMoviesByPage(int pageNum, int pageSize, int category) {
         return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(()->movieRepository.selectByCategory(category));
+    }
+
+    public PageInfo<MovieResult> MoviePageNoLogin(int pageNum, int pageSize) {
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(movieRepository::MoviePageNoLogin);
+    }
+
+    public PageInfo<MovieResult> MoviePageNoLoginCatetgory(int pageNum, int pageSize, int category) {
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(()->movieRepository.MoviePageNoLoginCatetgory(category));
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.ecjtu.amovie.api.repository;
 
 import com.ecjtu.amovie.api.entity.Movie;
+import com.ecjtu.amovie.form.MovieResult;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -95,4 +96,13 @@ public interface MovieRepository {
      */
     List<Movie> selectByCondition(Map<String,Object> conditions);
 
+
+    /**
+     * 电影页，没有登陆情况下的显示
+     * @return 电影的信息
+     */
+    List<MovieResult> MoviePageNoLogin();
+
+
+    List<MovieResult> MoviePageNoLoginCatetgory(Integer integer);
 }

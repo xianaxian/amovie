@@ -81,8 +81,12 @@
 
             <div class="coloum-wrapper">
                 <div class="pagination paginatioon--full">
-                    <a href="#" class="pagination__prev">prev</a>
-                    <a href="#" class="pagination__next">next</a>
+                    <span th:if="${watchlist.hasPreviousPage}">
+                        <a th:href="@{/user/watchlist(pageNum=${watchlist.pageNum}-1)}" class="pagination__prev">prev</a>
+                    </span>
+                    <span th:if="${watchlist.hasNextPage}">
+                        <a th:href="@{/user/watchlist(pageNum=${watchlist.pageNum}+1)}" class="pagination__next">next</a>
+                    </span>
                 </div>
             </div>
         </div>
