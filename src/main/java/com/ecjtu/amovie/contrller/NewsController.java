@@ -2,9 +2,7 @@ package com.ecjtu.amovie.contrller;
 
 import com.ecjtu.amovie.api.entity.News;
 import com.ecjtu.amovie.api.service.NewsService;
-import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,8 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/news")
 public class NewsController {
-    @Autowired
-    private NewsService newsService;
+    private final NewsService newsService;
+
+    public NewsController(NewsService newsService) {
+        this.newsService = newsService;
+    }
 
 
     /**
@@ -24,7 +25,7 @@ public class NewsController {
      *
      * @param pageNum 页码
      * @param pageSize 每页大小
-     * @return Json数据
+     * @return mav
      */
     @GetMapping
     @ResponseBody
@@ -39,9 +40,8 @@ public class NewsController {
 
     /**
      * 获取资讯
-     *
-     * @param id 咨询id
-     * @return Json数据
+     * @param id 资讯id
+     * @return mav
      */
     @GetMapping("/{id}")
     public ModelAndView getANews(@PathVariable("id") Integer id) {
@@ -52,23 +52,5 @@ public class NewsController {
         return mav;
     }
 
-    /**
-     * 创建资讯
-     *
-     * @param news 资讯
-     * @return 返回JSON数据
-     */
-    @PostMapping()
-    @ResponseBody
-    public JsonResult news(@RequestBody News news) {
-        int i = newsService.insertOneNews(news);
-        JsonResult result;
-        if (i == 1) {
-            result = JsonResult.success("创建咨询成功", null);
-        } else {
-            result = JsonResult.error(400, "创建失败");
-        }
-        return result;
-    }
 
 }

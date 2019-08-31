@@ -158,10 +158,11 @@
 
                         <div class="preview-footer">
                             <div class="movie__rate">
-                                <div class="score"></div>
+                                <div class="score" th:id="|score${m.id}|"></div>
                                 <span class="movie__rate-number"><span th:text="${m.num}"></span>个评分</span>
-                                <span class="movie__rating" th:text="${m.score}"></span>
+                                <span class="movie__rating" th:text="${#numbers.formatDecimal(m.score,1,1)}"></span>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -221,8 +222,27 @@
 <script type="text/javascript">
     $(document).ready(function () {
         init_MovieList();
-        /*init_Rates();*/
+
     });
+
 </script>
+
+<script th:each="m:${movies.list}">
+
+    $(document).ready(function () {
+        "use strict";
+        $('#score[[${m.id}]]').raty({
+            width: 130,
+            score: [[${m.score}]],
+            path: '/images/rate/',
+            starOff: 'star-off.svg',
+            starOn: 'star-on.svg',
+            readOnly:true
+        });
+    });
+
+</script>
+
+
 </body>
 </html>

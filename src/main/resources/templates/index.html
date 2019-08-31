@@ -18,106 +18,116 @@
             </div>
             <div class="col-sm-12 change--col">
                 <!-- 一项 -->
-                <div class="movie-beta__item ">
+<!--                <div th:with="var m =${bestMovie.get(0)}">-->
+                <div class="movie-beta__item " th:with="m0=${bestMovie.get(0)}">
                     <!-- 海报 -->
-                    <img alt="" src="http://placehold.it/380x600"/>
+                    <img alt="" th:src="${m0.poster}"/>
                     <!-- 评分 -->
-                    <span class="best-rate">5.0</span>
+                    <span class="best-rate" th:text="${#numbers.formatDecimal(m0.score,1,1)}">5.0</span>
 
                     <ul class="movie-beta__info">
-                        <li><span class="best-voted">今天 71 人为此影片评分</span></li>
+                        <li><span class="best-voted"th:text="${m0.num}"></span><span>为此影片评分</span></li>
                         <li>
-                            <p class="movie__time">169 分钟</p>
-                            <p>Adventure | Drama | Fantasy</p>
-                            <p>38 评论</p>
+                            <p th:text="${m0.name}"></p>
+                            <p class="movie__time"><span th:text="${m0.duration}"></span>min</p>
+                            <p><span th:each="c:${m0.categories}">
+                                <a th:text="${c.name}"></a>
+                            </span></p>
+<!--                            <p> 评论</p>-->
                         </li>
                         <li class="last-block">
-                            <a href="movie-page-left.html" class="slide__link">更多</a>
+                            <a th:href="|/movies/${m0.id}|" class="slide__link">更多</a>
                         </li>
                     </ul>
                 </div>
+<!--                </div>-->
                 <!-- 一项结束 -->
-                <div class="movie-beta__item second--item">
-                    <img alt="" src="http://placehold.it/380x600"/>
-                    <span class="best-rate">5.0</span>
+                <div class="movie-beta__item second--item" th:with="m1=${bestMovie.get(1)}">
+                    <img alt="" th:src="${m1.poster}"/>
+                    <span class="best-rate" th:text="${#numbers.formatDecimal(m1.score,1,1)}">5.0</span>
 
                     <ul class="movie-beta__info">
-                        <li><span class="best-voted">71 people voted today</span></li>
+                        <li><span class="best-voted" th:text="${m1.num}"></span><span>人为此影片评分</span></li>
                         <li>
-                            <p class="movie__time">169 min</p>
-                            <p>Adventure | Drama | Fantasy</p>
-                            <p>38 comments</p>
+                            <p th:text="${m1.name}"></p>
+                            <p class="movie__time"><span th:text="${m1.duration}"></span> min</p>
+                            <p><span th:each="c:${m1.categories}"><a th:text="${c.name}"></a></span></p>
+<!--                            <p>38 comments</p>-->
                         </li>
                         <li class="last-block">
-                            <a href="movie-page-left.html" class="slide__link">more</a>
+                            <a th:href="|/movies/${m1.id}|" class="slide__link">more</a>
                         </li>
                     </ul>
                 </div>
-                <div class="movie-beta__item third--item">
-                    <img alt="" src="http://placehold.it/380x600"/>
-                    <span class="best-rate">5.0</span>
+                <div class="movie-beta__item third--item" th:with="m2=${bestMovie.get(2)}">
+                    <img alt="" th:src="${m2.poster}"/>
+                    <span class="best-rate" th:text="${#numbers.formatDecimal(m2.score,1,1)}">5.0</span>
 
                     <ul class="movie-beta__info">
-                        <li><span class="best-voted">71 people voted today</span></li>
+                        <li><span class="best-voted" th:text="${m2.num}"></span><span>人为此影片评分</span></li>
                         <li>
-                            <p class="movie__time">169 min</p>
-                            <p>Adventure | Drama | Fantasy</p>
-                            <p>38 comments</p>
+                            <p th:text="${m2.name}"></p>
+                            <p class="movie__time"><span th:text="${m2.duration}"></span>min</p>
+                            <p><span th:each="c:${m2.categories}"><a th:text="${c.name}"></a></span></p>
+<!--                            <p>38 comments</p>-->
                         </li>
                         <li class="last-block">
-                            <a href="movie-page-left.html" class="slide__link">more</a>
+                            <a th:href="|/movies/${m2.id}|" class="slide__link">more</a>
                         </li>
                     </ul>
                 </div>
-                <div class="movie-beta__item hidden-xs">
-                    <img alt="" src="http://placehold.it/380x600"/>
-                    <span class="best-rate">5.0</span>
+                <div class="movie-beta__item hidden-xs" th:with="m3=${bestMovie.get(3)}">
+                    <img alt="" th:src="${m3.poster}"/>
+                    <span class="best-rate" th:text="${#numbers.formatDecimal(m3.score,1,1)}">5.0</span>
 
                     <ul class="movie-beta__info">
-                        <li><span class="best-voted">71 people voted today</span></li>
+                        <li><span class="best-voted" th:text="${m3.num}"></span><span>人为此影片评分</span></li>
                         <li>
-                            <p class="movie__time">169 min</p>
-                            <p>Adventure | Drama | Fantasy</p>
-                            <p>38 comments</p>
+                            <p th:text="${m3.name}"></p>
+                            <p class="movie__time"><span th:text="${m3.duration}"></span>min</p>
+                            <p><span th:each="c:${m3.categories}"><a th:text="${c.name}"></a></span></p>
+<!--                            <p>38 comments</p>-->
                         </li>
                         <li class="last-block">
-                            <a href="movie-page-left.html" class="slide__link">more</a>
+                            <a th:href="|/movies/${m3.id}|" class="slide__link">more</a>
                         </li>
                     </ul>
                 </div>
-                <div class="movie-beta__item hidden-xs hidden-sm">
-                    <img alt="" src="http://placehold.it/380x600"/>
-                    <span class="best-rate">5.0</span>
-
+                <div class="movie-beta__item hidden-xs hidden-sm" th:with="m4=${bestMovie.get(4)}">
+                    <img alt="" th:src="${m4.poster}"/>
+                    <span class="best-rate" th:text="${#numbers.formatDecimal(m4.score,1,1)}">5.0</span>
                     <ul class="movie-beta__info">
-                        <li><span class="best-voted">71 people voted today</span></li>
+                        <li><span class="best-voted" th:text="${m4.num}"></span><span>人为此影片评分</span></li>
                         <li>
-                            <p class="movie__time">169 min</p>
-                            <p>Adventure | Drama | Fantasy</p>
-                            <p>38 comments</p>
+                            <p th:text="${m4.name}"></p>
+                            <p class="movie__time"><span th:text="${m4.duration}"></span>min</p>
+                            <p><span th:each="c:${m4.categories}"><a th:text="${c.name}"></a></span></p>
+<!--                            <p>38 comments</p>-->
                         </li>
                         <li class="last-block">
-                            <a href="movie-page-left.html" class="slide__link">more</a>
+                            <a th:href="|/movies/${m4.id}|" class="slide__link">more</a>
                         </li>
                     </ul>
                 </div>
-                <div class="movie-beta__item hidden-xs hidden-sm">
-                    <img alt="" src="http://placehold.it/380x600"/>
-                    <span class="best-rate">5.0</span>
+                <div class="movie-beta__item hidden-xs hidden-sm" th:with="m5=${bestMovie.get(5)}">
+                    <img alt="" th:src="${m5.poster}" />
+                    <span class="best-rate" th:text="${#numbers.formatDecimal(m5.score,1,1)}">5.0</span>
 
                     <ul class="movie-beta__info">
-                        <li><span class="best-voted">71 people voted today</span></li>
+                        <li><span class="best-voted" th:text="${m5.num}"></span><span>人为此影片评分</span></li>
                         <li>
-                            <p class="movie__time">169 min</p>
-                            <p>Adventure | Drama | Fantasy</p>
-                            <p>38 comments</p>
+                            <p th:text="${m5.name}"></p>
+                            <p class="movie__time"><span th:text="${m5.duration}"></span>min</p>
+                            <p><span th:each="c:${m5.categories}"><a th:text="${c.name}"></a></span></p>
+<!--                            <p>38 comments</p>-->
                         </li>
                         <li class="last-block">
-                            <a href="movie-page-left.html" class="slide__link">more</a>
+                            <a th:href="|/movies/${m5.id}|" class="slide__link">more</a>
                         </li>
                     </ul>
                 </div>
             </div>
+<!--            </div>-->
         </div>
         <!-- 间隔 -->
         <div class="clearfix"></div>
@@ -155,9 +165,7 @@
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div
-                            class="movie movie--test movie--test--light movie--test--left"
-                    >
+                    <div class="movie movie--test movie--test--light movie--test--left">
                         <div class="movie__images">
                             <a href="movie-page-left.html" class="movie-beta__link">
                                 <img alt="" src="http://placehold.it/424x424"/>
@@ -185,9 +193,7 @@
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div
-                            class="movie movie--test movie--test--light movie--test--right"
-                    >
+                    <div class="movie movie--test movie--test--light movie--test--right">
                         <div class="movie__images">
                             <a href="movie-page-left.html" class="movie-beta__link">
                                 <img alt="" src="http://placehold.it/424x424"/>
@@ -215,9 +221,7 @@
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div
-                            class="movie movie--test movie--test--dark movie--test--right"
-                    >
+                    <div class="movie movie--test movie--test--dark movie--test--right">
                         <div class="movie__images">
                             <a href="movie-page-left.html" class="movie-beta__link">
                                 <img alt="" src="http://placehold.it/424x424"/>
@@ -245,9 +249,7 @@
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div
-                            class="movie movie--test movie--test--dark movie--test--left"
-                    >
+                    <div class="movie movie--test movie--test--dark movie--test--left">
                         <div class="movie__images">
                             <a href="movie-page-left.html" class="movie-beta__link">
                                 <img alt="" src="http://placehold.it/424x424"/>
@@ -275,9 +277,7 @@
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div
-                            class="movie movie--test movie--test--light movie--test--left"
-                    >
+                    <div class="movie movie--test movie--test--light movie--test--left">
                         <div class="movie__images">
                             <a href="movie-page-left.html" class="movie-beta__link">
                                 <img alt="" src="http://placehold.it/424x424"/>
@@ -305,9 +305,7 @@
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div
-                            class="movie movie--test movie--test--light movie--test--right"
-                    >
+                    <div class="movie movie--test movie--test--light movie--test--right">
                         <div class="movie__images">
                             <a href="movie-page-left.html" class="movie-beta__link">
                                 <img alt="" src="http://placehold.it/424x424"/>
@@ -334,9 +332,7 @@
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div
-                            class="movie movie--test movie--test--dark movie--test--right"
-                    >
+                    <div  class="movie movie--test movie--test--dark movie--test--right">
                         <div class="movie__images">
                             <a href="movie-page-left.html" class="movie-beta__link">
                                 <img alt="" src="http://placehold.it/424x424"/>

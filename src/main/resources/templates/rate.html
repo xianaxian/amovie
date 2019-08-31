@@ -16,66 +16,47 @@
 
               <div class="rates-wrapper rates--full">
                 <table>
+                  <span th:each="m:${list}">
                   <colgroup class="col-width-lg"></colgroup>
                   <colgroup class="col-width"></colgroup>
                   <colgroup class="col-width-sm"></colgroup>
                   <colgroup class="col-width"></colgroup>
 
-                  <tr class="rates rates--top">
+                    <span th:if="${m.no <= 3}">
+                      <tr class="rates rates--top">
                     <td class="rates__obj">
-                      <a href="#" class="rates__obj-name"
-                        >1. Thor: The Dark World</a
+                      <a th:href="|/movies/${m.id}|" class="rates__obj-name" th:text="${m.no}+'.'+${m.name}"
+                      >1. Thor: The Dark World</a
                       >
                     </td>
-                    <td class="rates__vote">233 546 评分</td>
-                    <td class="rates__result">5.0</td>
-                    <td class="rates__stars"><div class="score"></div></td>
+                    <td class="rates__vote"><sapn th:text="${m.num}"></sapn> 个评分</td>
+                    <td class="rates__result" th:text="${#numbers.formatDecimal(m.score,1,1)}">5.0</td>
+                    <td class="rates__stars"><div class="score" th:id="|score${m.id}|"></div></td>
                   </tr>
 
-                  <tr class="rates rates--top">
-                    <td class="rates__obj">
-                      <a href="#" class="rates__obj-name">2. The Book Thief</a>
-                    </td>
-                    <td class="rates__vote">163 546 评分</td>
-                    <td class="rates__result">5.0</td>
-                    <td class="rates__stars"><div class="score"></div></td>
-                  </tr>
+                    </span>
 
-                  <tr class="rates rates--top">
+                    <span th:if="${m.no > 3}">
+                       <tr class="rates">
                     <td class="rates__obj">
-                      <a href="#" class="rates__obj-name">3. How I Live Now</a>
-                    </td>
-                    <td class="rates__vote">843 546 votes</td>
-                    <td class="rates__result">4.9</td>
-                    <td class="rates__stars"><div class="score"></div></td>
-                  </tr>
-
-                  <tr class="rates">
-                    <td class="rates__obj">
-                      <a href="#" class="rates__obj-name"
-                        >4. The Armstrong Lie</a
+                      <a th:href="|/movies/${m.id}|" class="rates__obj-name" th:text="${m.no}+'.'+${m.name}"
+                      >4. The Armstrong Lie</a
                       >
                     </td>
-                    <td class="rates__vote">3 598 votes</td>
-                    <td class="rates__result">4.9</td>
-                    <td class="rates__stars"><div class="score"></div></td>
+                    <td class="rates__vote"><span th:text="${m.num}"></span> 个评分</td>
+                    <td class="rates__result" th:text="${#numbers.formatDecimal(m.score,1,1)}"></td>
+                    <td class="rates__stars"><div class="score" th:id="|score${m.id}|"></div></td>
                   </tr>
+                    </span>
 
-                  <tr class="rates">
-                    <td class="rates__obj">
-                      <a href="#" class="rates__obj-name">5. Ender's Game</a>
-                    </td>
-                    <td class="rates__vote">14 641 votes</td>
-                    <td class="rates__result">4.8</td>
-                    <td class="rates__stars"><div class="score"></div></td>
-                  </tr>
+                  </span>
                 </table>
               </div>
 
-              <div class="pagination paginatioon--full coloum-wrapper">
-                <a href="#" class="pagination__prev">prev</a>
-                <a href="#" class="pagination__next">next</a>
-              </div>
+<!--              <div class="pagination paginatioon&#45;&#45;full coloum-wrapper">-->
+<!--                <a href="#" class="pagination__prev">prev</a>-->
+<!--                <a href="#" class="pagination__next">next</a>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
@@ -96,7 +77,23 @@
     <script type="text/javascript">
       $(document).ready(function() {
         // init_Rates();
+        init_MovieList();
       });
+    </script>
+    <script th:each="m:${list}">
+
+      $(document).ready(function () {
+        "use strict";
+        $('#score[[${m.id}]]').raty({
+          width: 130,
+          score: [[${m.score}]],
+          path: '/images/rate/',
+          starOff: 'star-off.svg',
+          starOn: 'star-on.svg',
+          readOnly:true
+        });
+      });
+
     </script>
   </body>
 </html>

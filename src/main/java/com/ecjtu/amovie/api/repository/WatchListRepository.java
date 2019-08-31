@@ -1,6 +1,7 @@
 package com.ecjtu.amovie.api.repository;
 
 import com.ecjtu.amovie.api.entity.Movie;
+import com.ecjtu.amovie.form.MovieResult;
 import lombok.Data;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -18,7 +19,7 @@ import java.util.List;
 public interface WatchListRepository {
     List<Integer> selectCategoryOfMovie(Integer movieId);
 
-    List<Movie> selectWatchList(int userid);
+    List<MovieResult> selectWatchList(int userid);
 
     @Insert("INSERT INTO watch_list (movie_id, user_id, create_time) VALUES (#{movieId},#{userId},#{date});")
     int insertOne(@Param("movieId") int movieId, @Param("userId") int userId, @Param("date")Date date);

@@ -64,9 +64,9 @@
 
                         <div class="preview-footer">
                             <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rate-number">170 个评分</span>
-                                <span class="movie__rating">5.0</span>
+                                <div class="score" th:id="|score${m.id}|"></div>
+                                <span class="movie__rate-number" ><span th:text="${m.num}"></span> 个评分</span>
+                                <span class="movie__rating" th:text="${m.score}">5.0</span>
                             </div>
                         </div>
                     </div>
@@ -106,6 +106,21 @@
     $(document).ready(function () {
         init_MovieList();
     });
+</script>
+<script th:each="m:${watchlist.list}">
+
+    $(document).ready(function () {
+        "use strict";
+        $('#score[[${m.id}]]').raty({
+            width: 130,
+            score: [[${m.score}]],
+            path: '/images/rate/',
+            starOff: 'star-off.svg',
+            starOn: 'star-on.svg',
+            readOnly:true
+        });
+    });
+
 </script>
 </body>
 </html>

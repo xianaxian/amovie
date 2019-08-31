@@ -9,6 +9,7 @@ import com.ecjtu.amovie.api.service.ReviewService;
 import com.ecjtu.amovie.api.service.SceneService;
 import com.ecjtu.amovie.api.service.WatchListService;
 import com.ecjtu.amovie.form.MovieResult;
+import com.ecjtu.amovie.form.RateListForm;
 import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
@@ -53,9 +54,9 @@ public class MovieController {
                                 HttpSession session) {
         PageInfo<MovieResult> movies;
         if (categoryId==0){
-            movies=movieService.MoviePageNoLogin(pageNum, pageSize);
+            movies=movieService.moviePageNoLogin(pageNum, pageSize);
         }else {
-            movies=movieService.MoviePageNoLoginCatetgory(pageNum, pageSize, categoryId);
+            movies=movieService.moviePageNoLoginCatetgory(pageNum, pageSize, categoryId);
         }
         ModelAndView mav=new ModelAndView();
         mav.addObject("movies",movies);
@@ -98,5 +99,14 @@ public class MovieController {
         }else {
             return JsonResult.error(400,"发表评论失败");
         }
+    }
+
+    @GetMapping("/rate")
+    public ModelAndView getRankingList(){
+        ModelAndView mav= new ModelAndView();
+        List<RateListForm> rankingList = movieService.getRankingList();
+        mav.addObject("list", rankingList);
+        mav.setViewName("rate");
+        return mav;
     }
 }

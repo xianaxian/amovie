@@ -2,6 +2,7 @@ package com.ecjtu.amovie.api.repository;
 
 import com.ecjtu.amovie.api.entity.Movie;
 import com.ecjtu.amovie.form.MovieResult;
+import com.ecjtu.amovie.form.RateListForm;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -101,8 +102,18 @@ public interface MovieRepository {
      * 电影页，没有登陆情况下的显示
      * @return 电影的信息
      */
-    List<MovieResult> MoviePageNoLogin();
+    List<MovieResult> moviePageNoLogin();
 
 
-    List<MovieResult> MoviePageNoLoginCatetgory(Integer integer);
+    List<MovieResult> moviePageNoLoginCatetgory(Integer integer);
+
+
+    List<RateListForm> rateList();
+
+    /**
+     * 查找评分最佳的五部电影
+     * @return
+     */
+    List<MovieResult> bestMovie();
+
 }

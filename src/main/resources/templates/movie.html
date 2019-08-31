@@ -23,6 +23,7 @@
                         <div class="movie__rate" th:if="${session.user!=null}">
                             Your vote:
                             <div id="score" class="score"></div>
+                            <input type="hidden" id="mId" th:value="${movie.id}">
                         </div>
                     </div>
 
@@ -75,17 +76,6 @@
                         <div class="col-sm-4">
                             <p class="time-select__place">Curzon</p>
                         </div>
-<!--                        <ul class="col-sm-8 items-wrap">-->
-<!--                            <li class="time-select__item" data-time="09:00">09:00</li>-->
-<!--                            <li class="time-select__item" data-time="11:00">11:00</li>-->
-<!--                            <li class="time-select__item" data-time="13:00">13:00</li>-->
-<!--                            <li class="time-select__item" data-time="15:00">15:00</li>-->
-<!--                            <li class="time-select__item" data-time="17:00">17:00</li>-->
-<!--                            <li class="time-select__item" data-time="19:0">19:00</li>-->
-<!--                            <li class="time-select__item" data-time="21:0">21:00</li>-->
-<!--                            <li class="time-select__item" data-time="23:0">23:00</li>-->
-<!--                            <li class="time-select__item" data-time="01:0">01:00</li>-->
-<!--                        </ul>-->
                         <ul class="col-sm-8 items-wrap">
                             <span th:each="s:${scenes}">
                                 <li  class="time-select__item" th:data-time="${s.showtime}" th:text="${s.showtime}"></li>

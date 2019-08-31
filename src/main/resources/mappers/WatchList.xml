@@ -18,9 +18,36 @@
       <result column="name" property="name"/>
     </collection>
   </resultMap>
-  <select id="selectWatchList" resultMap="movieWithCategoryA" parameterType="int">
-    select movie.*
-    from watch_list left join  movie on movie.id=watch_list.movie_id
+
+  <resultMap id="movieWithCategoryB" type="com.ecjtu.amovie.form.MovieResult">
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="duration" property="duration"/>
+    <result column="directors" property="directors"/>
+    <result column="actors" property="actors"/>
+    <result column="release_date" property="releaseDate"/>
+    <result column="status" property="status"/>
+    <result column="plot" property="plot"/>
+    <result column="poster" property="poster"/>
+    <result column="country" property="country"/>
+    <result column="avg" property="score"/>
+    <result column="num" property="num"/>
+    <collection column="id" property="categories" ofType="com.ecjtu.amovie.api.entity.Category"
+                select="selectCategoryOfMovie">
+      <id column="id" property="id"/>
+      <result column="name" property="name"/>
+    </collection>
+  </resultMap>
+  <select id="selectWatchList" resultMap="movieWithCategoryB" parameterType="int">
+    select movie.*,sc.avg,sc.num
+    from movie
+           left join (
+      SELECT movie_id,AVG(score) avg,count(*) num
+      from score
+      GROUP BY movie_id) sc
+                     on movie.id=sc.movie_id
+           left join watch_list
+                     on watch_list.movie_id=movie.id
     where user_id=${userid}
   </select>
   <!--通过电影id查询分类-->

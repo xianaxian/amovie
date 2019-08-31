@@ -746,7 +746,7 @@ function init_MovieList() {
 
     //3. Rating scrore init
     //Rating star
-/*    $('.score').raty({
+    $('.score').raty({
         width: 130,
         score: 0,
         number: 5,
@@ -757,7 +757,7 @@ function init_MovieList() {
         path: '/images/rate/',
         starOff: 'star-off.svg',
         starOn: 'star-on.svg'
-    });*/
+    });
 
     //4. Sorting by category
     // sorting function
@@ -937,12 +937,15 @@ function init_Rates() {
     });
 
     //After rate callback
-    $('.score').click(function () {
+    $('#score').click(function () {
         var score=$('.score').raty('score');
-        let m=window.location.href;
-        m=m.substring(m.lastIndexOf('/')+1);
+        // let m=window.location.href;
+        // m=m.substring(m.lastIndexOf('/')+1);
+        var mId = $('#mId').val();
+        // alert("mId"+mId);
+
         var data={
-            movieId:m,
+            movieId:mId,
             score:score
         }
         $.ajax({

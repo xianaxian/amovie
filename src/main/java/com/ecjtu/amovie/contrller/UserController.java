@@ -5,6 +5,7 @@ import com.ecjtu.amovie.api.entity.User;
 import com.ecjtu.amovie.api.service.ScoreService;
 import com.ecjtu.amovie.api.service.UserService;
 import com.ecjtu.amovie.api.service.WatchListService;
+import com.ecjtu.amovie.form.MovieResult;
 import com.ecjtu.amovie.form.RateForm;
 import com.ecjtu.amovie.form.RegisterUserForm;
 import com.ecjtu.amovie.utils.MD5Utils;
@@ -76,7 +77,7 @@ public class UserController {
         if (user == null) {
             return null;
         }
-        PageInfo<Movie> watchlist = watchListService.watchlist(pageNum, pageSize, user.getId());
+        PageInfo<MovieResult> watchlist = watchListService.watchlist(pageNum, pageSize, user.getId());
         mav.addObject("watchlist", watchlist);
         mav.setViewName("watchlist");
         return mav;

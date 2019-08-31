@@ -1,7 +1,9 @@
 package com.ecjtu.amovie.api.service;
 
 import com.ecjtu.amovie.api.entity.Movie;
+import com.ecjtu.amovie.api.repository.MovieRepository;
 import com.ecjtu.amovie.api.repository.WatchListRepository;
+import com.ecjtu.amovie.form.MovieResult;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class WatchListService {
      * @param userId 用户的id
      * @return 分页的用户的播放列表中的数据
      */
-    public PageInfo<Movie> watchlist(int pageNum, int pageSize, int userId){
+    public PageInfo<MovieResult> watchlist(int pageNum, int pageSize, int userId){
         return PageHelper.startPage(pageNum,pageSize).doSelectPageInfo(()->watchListRepository.selectWatchList(userId));
     }
 
