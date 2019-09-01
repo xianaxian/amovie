@@ -33,4 +33,7 @@ public interface SceneRepository {
     @Select("select * from scene where movie_id=#{id}")
     List<Scene> selectByMovieId(Integer id);
 
+    @Select("SELECT booked_seat FROM scene where id=#{id};")
+    String selectSelled(Integer id);
+
 }

@@ -126,6 +126,18 @@
         where status=1
     </select>
 
+    <select id="released" resultMap="movieWithCategoryB" >
+        select(@i:=@i+1) as no,m.* from ( select movie.*,sc.score,sc.num
+                                          from movie
+                                                   left join (
+                                              SELECT movie_id,AVG(score) score,count(*) num
+                                              from score
+                                              GROUP BY movie_id) sc
+                                                             on movie.id=sc.movie_id
+                                          where movie.`status`=1
+                                        ) m,(select @i:=0) as it
+    </select>
+
     <insert id="insertCategories">
         INSERT INTO movie_category (movie_id, category_id)
         VALUES
@@ -147,6 +159,7 @@
         <result column="country" property="country"/>
         <result column="score" property="score"/>
         <result column="num" property="num"/>
+        <result column="no" property="no"/>
         <collection column="id" property="categories" ofType="com.ecjtu.amovie.api.entity.Category"
                     select="selectCategoryOfMovie">
             <id column="id" property="id"/>
@@ -162,8 +175,6 @@
             from score
             GROUP BY movie_id) sc
             on movie.id=sc.movie_id
-
-
     </select>
 
     <select id="moviePageNoLoginCatetgory" resultMap="movieWithCategoryB" parameterType="int">

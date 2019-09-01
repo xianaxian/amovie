@@ -40,6 +40,10 @@ public class MovieService {
         return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(()->movieRepository.selectByCategory(category));
     }
 
+    /**
+     * 查询电影排行版的前20
+     * @return 前20个电影的信息
+     */
     public List<RateListForm> getRankingList(){
         return movieRepository.rateList();
     }
@@ -127,6 +131,10 @@ public class MovieService {
 
     public List<MovieResult> bestMovie(){
         return movieRepository.bestMovie();
+    }
+
+    public List<MovieResult> released(){
+        return movieRepository.released();
     }
 
 }

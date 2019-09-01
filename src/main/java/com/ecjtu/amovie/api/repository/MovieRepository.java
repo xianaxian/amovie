@@ -50,6 +50,7 @@ public interface MovieRepository {
 
     List<Movie> selectReleased();
 
+    List<MovieResult> released();
 
     /**
      * 没有使用
@@ -83,7 +84,7 @@ public interface MovieRepository {
     int insertCategories(@Param("movieId") Integer movieId, @Param("ids") List<Integer> ids);
 
     /**
-     * 删除某个电影的所有分裂
+     * 删除某个电影的所有分类
      * @param movieId 电影的id
      * @return 返回是否删除成功
      */
@@ -111,7 +112,7 @@ public interface MovieRepository {
     List<RateListForm> rateList();
 
     /**
-     * 查找评分最佳的五部电影
+     * 查找评分最佳的六部电影
      * @return
      */
     List<MovieResult> bestMovie();

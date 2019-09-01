@@ -4,10 +4,13 @@ import com.ecjtu.amovie.api.entity.Movie;
 import com.ecjtu.amovie.api.entity.Scene;
 import com.ecjtu.amovie.api.repository.MovieRepository;
 import com.ecjtu.amovie.api.repository.SceneRepository;
+import com.ecjtu.amovie.utils.Json;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -79,5 +82,22 @@ public class SceneService {
 
     public List<Scene> selectByMovieId(Integer id){
         return sceneRepository.selectByMovieId(id);
+    }
+
+//    public HashSet<String> getSelled(int id){
+////        String s = sceneRepository.selectSelled(id);
+////        if (s==null){
+////            return new HashSet<>();
+////        }
+////        //noinspection unchecked
+////        return Json.parseObject(s, HashSet.class);
+////    }
+
+    public String getSelled(int id){
+        String s = sceneRepository.selectSelled(id);
+        if (StringUtils.isEmpty(s)){
+            return "[]";
+        }
+        return s;
     }
 }

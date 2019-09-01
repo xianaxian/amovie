@@ -39,7 +39,7 @@ public class MovieResult {
 //    private Integer[] categoryIds;
 
     private List<Category> categories;
-    private Integer i;
+    private Integer no;
     private Double score=0.0;
     /**
      * 给该电影评分的人

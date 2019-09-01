@@ -27,17 +27,16 @@
                     <div class="col-sm-3">
                         <p class="time-select__place">Curzon</p>
                     </div>
-                    <ul class="col-sm-6 items-wrap">
-                        <li class="time-select__item" data-time='09:00'>09:00</li>
-                        <li class="time-select__item" data-time='11:00'>11:00</li>
-                        <li class="time-select__item" data-time='13:00'>13:00</li>
-                        <li class="time-select__item" data-time='15:00'>15:00</li>
-                        <li class="time-select__item" data-time='17:00'>17:00</li>
-                        <li class="time-select__item" data-time='19:00'>19:00</li>
-                        <li class="time-select__item" data-time='21:00'>21:00</li>
-                        <li class="time-select__item" data-time='23:00'>23:00</li>
-                        <li class="time-select__item" data-time='01:00'>01:00</li>
+
+                    <ul class="col-sm-8 items-wrap">
+                            <span th:each="s:${scenes}">
+                                <li th:id="|scene${s.id}|" onclick="select(this)" class="time-select__item" th:data-time="${s.showtime}" th:text="${s.showtime}"></li>
+                            </span>
+                        <span th:if="${scenes.isEmpty()}" >
+                                <li th:text="好像没有场次"></li>
+                            </span>
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -46,7 +45,7 @@
 
     <div class="clearfix"></div>
 
-    <form id='film-and-time' class="booking-form" method='get' action='book2.html'>
+    <form id='film-and-time' class="booking-form">
         <input type='text' name='choosen-movie' class="choosen-movie">
 
         <input type='text' name='choosen-city' class="choosen-city">
@@ -82,7 +81,22 @@
 <script type="text/javascript">
     $(document).ready(function () {
         init_BookingOne();
+        $('.arrow--next').click(function (e) {
+            e.preventDefault();
+            if (scene==null){
+                alert("您好像没有选择哪个场次");
+                return false;
+            }
+            var id=scene.substring(5);
+            alert(id);
+            window.location.href=`/book2/${id}`;
+            return false;
+        });
     });
+    var scene;
+    function select(o) {
+       scene= $(o).attr('id');
+    }
 </script>
 
 </body>

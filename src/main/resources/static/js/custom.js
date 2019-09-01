@@ -288,6 +288,7 @@ function init_BookingTwo() {
         e.preventDefault();
         var place = $(this).attr('data-place');
         var ticketPrice = $(this).attr('data-price');
+        alert(ticketPrice)
 
         if (!$(e.target).hasClass('sits-state--your')) {
 
@@ -296,20 +297,20 @@ function init_BookingTwo() {
 
                 $('.checked-place').prepend('<span class="choosen-place ' + place + '">' + place + '</span>');
 
-                switch (ticketPrice) {
-                    case '10':
-                        sum += 10;
-                        cheap += 1;
-                        break;
-                    case '20':
-                        sum += 20;
-                        middle += 1;
-                        break;
-                    case '30':
-                        sum += 30;
-                        expansive += 1;
-                        break;
-                }
+                // switch (ticketPrice) {
+                //     case '10':
+                //         sum += 10;
+                //         cheap += 1;
+                //         break;
+                //     case '20':
+                //         sum += 20;
+                //         middle += 1;
+                //         break;
+                //     case '30':
+                //         sum += 30;
+                //         expansive += 1;
+                //         break;
+                // }
 
                 $('.checked-result').text('$' + sum);
             }

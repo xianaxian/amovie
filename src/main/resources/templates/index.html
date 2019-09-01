@@ -43,7 +43,7 @@
 <!--                </div>-->
                 <!-- 一项结束 -->
                 <div class="movie-beta__item second--item" th:with="m1=${bestMovie.get(1)}">
-                    <img alt="" th:src="${m1.poster}"/>
+                    <img alt="" th:src="${m1.poster}" style="width:190px; height:271px;" />
                     <span class="best-rate" th:text="${#numbers.formatDecimal(m1.score,1,1)}">5.0</span>
 
                     <ul class="movie-beta__info">
@@ -60,7 +60,7 @@
                     </ul>
                 </div>
                 <div class="movie-beta__item third--item" th:with="m2=${bestMovie.get(2)}">
-                    <img alt="" th:src="${m2.poster}"/>
+                    <img alt="" th:src="${m2.poster}" style="width:190px; height:271px;" />
                     <span class="best-rate" th:text="${#numbers.formatDecimal(m2.score,1,1)}">5.0</span>
 
                     <ul class="movie-beta__info">
@@ -77,7 +77,7 @@
                     </ul>
                 </div>
                 <div class="movie-beta__item hidden-xs" th:with="m3=${bestMovie.get(3)}">
-                    <img alt="" th:src="${m3.poster}"/>
+                    <img alt="" th:src="${m3.poster}" style="width:190px; height:271px;" />
                     <span class="best-rate" th:text="${#numbers.formatDecimal(m3.score,1,1)}">5.0</span>
 
                     <ul class="movie-beta__info">
@@ -94,7 +94,7 @@
                     </ul>
                 </div>
                 <div class="movie-beta__item hidden-xs hidden-sm" th:with="m4=${bestMovie.get(4)}">
-                    <img alt="" th:src="${m4.poster}"/>
+                    <img alt="" th:src="${m4.poster}" style="width:190px; height:271px;"  />
                     <span class="best-rate" th:text="${#numbers.formatDecimal(m4.score,1,1)}">5.0</span>
                     <ul class="movie-beta__info">
                         <li><span class="best-voted" th:text="${m4.num}"></span><span>人为此影片评分</span></li>
@@ -110,7 +110,7 @@
                     </ul>
                 </div>
                 <div class="movie-beta__item hidden-xs hidden-sm" th:with="m5=${bestMovie.get(5)}">
-                    <img alt="" th:src="${m5.poster}" />
+                    <img alt="" th:src="${m5.poster}"  style="width:190px; height:271px;" />
                     <span class="best-rate" th:text="${#numbers.formatDecimal(m5.score,1,1)}">5.0</span>
 
                     <ul class="movie-beta__info">
@@ -132,244 +132,154 @@
         <!-- 间隔 -->
         <div class="clearfix"></div>
         <h2 id="target" class="page-heading heading--outcontainer">正在热映</h2>
+
+
         <!-- 热映 -->
         <div class="col-sm-12">
             <div class="row">
-                <div class="col-sm-8 col-md-9">
+                <div class="col-sm-8 col-md-9" >
+                    <div th:each="m:${released}">
                     <!-- Movie variant with time -->
-                    <div class="movie movie--test movie--test--dark movie--test--left">
+                    <div class="movie movie--test movie--test--dark movie--test--left" th:if="${m.no % 4 == 1}">
                         <div class="movie__images">
-                            <a href="movie-page-left.html" class="movie-beta__link">
-                                <img alt="" src="http://placehold.it/424x424"/>
+                            <a th:href="|/movies/${m.id}|" class="movie-beta__link">
+                                <img th:alt="${m.name}"  th:src="${m.poster}" style="width:440px;height:330px;"/>
                             </a>
                         </div>
 
                         <div class="movie__info">
-                            <a href="movie-page-left.html" class="movie__title"
-                            >Gravity (2013)
+                            <a th:href="|/movies/${m.id}|" class="movie__title" th:text="|${m.name}(${m.releaseDate.getYear()+1900})|"
+                            >
                             </a>
 
-                            <p class="movie__time">91 min</p>
+                            <p class="movie__time" th:text="${m.duration}+'min'"></p>
 
                             <p class="movie__option">
-                                <a href="#">Sci-Fi</a> | <a href="#">Thriller</a> |
-                                <a href="#">Drama</a>
+                                <span th:each="c:${m.categories}">
+                                    <a th:text="${c.name}" th:href="'/movies?category='+${c.id}" ></a>
+                                </span>
                             </p>
+                            <p class="movie__option" th:text="'导演:'+${m.directors}"></p>
+                            <p class="movie__option" th:text="'演员:'+${m.actors}"></p>
+                            <p class="movie__option" th:text="'制片国家/地区:'+${m.country}"></p>
 
-                            <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rating">4.1</span>
+                            <div class="movie__rate" style="margin-top: 300px">
+                                <div class="score" th:id="|score${m.id}|"></div>
+                                <span class="movie__rating" th:text="${#numbers.formatDecimal(m.score,1,1)}"></span>
                             </div>
                         </div>
                     </div>
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div class="movie movie--test movie--test--light movie--test--left">
+                    <div class="movie movie--test movie--test--light movie--test--left" th:if="${m.no % 4 == 2}">
                         <div class="movie__images">
-                            <a href="movie-page-left.html" class="movie-beta__link">
-                                <img alt="" src="http://placehold.it/424x424"/>
+                            <a th:href="|/movies/${m.id}|" class="movie-beta__link">
+                                <img th:alt="${m.name}"  th:src="${m.poster}" style="width:440px;height:330px;"/>
                             </a>
                         </div>
 
                         <div class="movie__info">
-                            <a href="movie-page-left.html" class="movie__title"
-                            >The Hobbit: The Desolation of Smaug (2013)
+                            <a th:href="|/movies/${m.id}|" class="movie__title" th:text="|${m.name}(${m.releaseDate.getYear()+1900})|"
+                            >
                             </a>
 
-                            <p class="movie__time">169 min</p>
+                            <p class="movie__time" th:text="${m.duration}+'min'"></p>
 
                             <p class="movie__option">
-                                <a href="#">Adventure</a> | <a href="#">Fantasy</a> |
-                                <a href="#">Drama</a>
+                                <span th:each="c:${m.categories}">
+                                    <a th:text="${c.name}" th:href="'/movies?category='+${c.id}" ></a>
+                                </span>
                             </p>
+                            <p class="movie__option" th:text="'导演:'+${m.directors}"></p>
+                            <p class="movie__option" th:text="'演员:'+${m.actors}"></p>
+                            <p class="movie__option" th:text="'制片国家/地区:'+${m.country}"></p>
 
-                            <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rating">5.0</span>
+                            <div class="movie__rate" style="margin-top: 300px">
+                                <div class="score" th:id="|score${m.id}|"></div>
+                                <span class="movie__rating" th:text="${#numbers.formatDecimal(m.score,1,1)}"></span>
                             </div>
                         </div>
                     </div>
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div class="movie movie--test movie--test--light movie--test--right">
+                    <div class="movie movie--test movie--test--light movie--test--right" th:if="${m.no % 4 ==3}">
                         <div class="movie__images">
-                            <a href="movie-page-left.html" class="movie-beta__link">
-                                <img alt="" src="http://placehold.it/424x424"/>
+                            <a th:href="|/movies/${m.id}|" class="movie-beta__link">
+                                <img th:alt="${m.name}"  th:src="${m.poster}" style="width:440px;height:330px;"/>
                             </a>
                         </div>
 
                         <div class="movie__info">
-                            <a href="movie-page-left.html" class="movie__title"
-                            >The Hunger Games: Catching Fire (2013)
+                            <a th:href="|/movies/${m.id}|" class="movie__title" th:text="|${m.name}(${m.releaseDate.getYear()+1900})|"
+                            >
                             </a>
 
-                            <p class="movie__time">146 min</p>
+                            <p class="movie__time" th:text="${m.duration}+'min'"></p>
 
                             <p class="movie__option">
-                                <a href="#">Action</a> | <a href="#">Adventure</a> |
-                                <a href="#">Sci-Fi</a>
+                                <span th:each="c:${m.categories}">
+                                    <a th:text="${c.name}" th:href="'/movies?category='+${c.id}" ></a>
+                                </span>
                             </p>
+                            <p class="movie__option" th:text="'导演:'+${m.directors}"></p>
+                            <p class="movie__option" th:text="'演员:'+${m.actors}"></p>
+                            <p class="movie__option" th:text="'制片国家/地区:'+${m.country}"></p>
 
-                            <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rating">4.9</span>
+                            <div class="movie__rate" style="margin-top: 300px">
+                                <div class="score" th:id="|score${m.id}|"></div>
+                                <span class="movie__rating" th:text="${#numbers.formatDecimal(m.score,1,1)}"></span>
                             </div>
                         </div>
+
                     </div>
                     <!-- Movie variant with time -->
 
                     <!-- Movie variant with time -->
-                    <div class="movie movie--test movie--test--dark movie--test--right">
+                    <div class="movie movie--test movie--test--dark movie--test--right" th:if="${m.no % 4== 0}">
                         <div class="movie__images">
-                            <a href="movie-page-left.html" class="movie-beta__link">
-                                <img alt="" src="http://placehold.it/424x424"/>
+                            <a th:href="|/movies/${m.id}|" class="movie-beta__link">
+                                <img th:alt="${m.name}"  th:src="${m.poster}" style="width:440px;height:330px;"/>
                             </a>
                         </div>
 
                         <div class="movie__info">
-                            <a href="movie-page-left.html" class="movie__title"
-                            >Thor: The Dark World (2013)
+                            <a th:href="|/movies/${m.id}|" class="movie__title" th:text="|${m.name}(${m.releaseDate.getYear()+1900})|"
+                            >
                             </a>
 
-                            <p class="movie__time">112 min</p>
+                            <p class="movie__time" th:text="${m.duration}+'min'"></p>
 
                             <p class="movie__option">
-                                <a href="#">Action</a> | <a href="#">Adventure</a> |
-                                <a href="#">Fantasy</a>
+                                <span th:each="c:${m.categories}">
+                                    <a th:text="${c.name}" th:href="'/movies?category='+${c.id}" ></a>
+                                </span>
                             </p>
+                            <p class="movie__option" th:text="'导演:'+${m.directors}"></p>
+                            <p class="movie__option" th:text="'演员:'+${m.actors}"></p>
+                            <p class="movie__option" th:text="'制片国家/地区:'+${m.country}"></p>
 
-                            <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rating">5.0</span>
+                            <div class="movie__rate" style="margin-top: 300px">
+                                <div class="score" th:id="|score${m.id}|"></div>
+                                <span class="movie__rating" th:text="${#numbers.formatDecimal(m.score,1,1)}"></span>
                             </div>
                         </div>
                     </div>
                     <!-- Movie variant with time -->
 
-                    <!-- Movie variant with time -->
-                    <div class="movie movie--test movie--test--dark movie--test--left">
-                        <div class="movie__images">
-                            <a href="movie-page-left.html" class="movie-beta__link">
-                                <img alt="" src="http://placehold.it/424x424"/>
-                            </a>
-                        </div>
 
-                        <div class="movie__info">
-                            <a href="movie-page-left.html" class="movie__title"
-                            >World War Z (2013)
-                            </a>
-
-                            <p class="movie__time">116 min</p>
-
-                            <p class="movie__option">
-                                <a href="#">Action</a> | <a href="#">Adventure</a> |
-                                <a href="#">Horror</a>
-                            </p>
-
-                            <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rating">4.1</span>
-                            </div>
-                        </div>
                     </div>
-                    <!-- Movie variant with time -->
-
-                    <!-- Movie variant with time -->
-                    <div class="movie movie--test movie--test--light movie--test--left">
-                        <div class="movie__images">
-                            <a href="movie-page-left.html" class="movie-beta__link">
-                                <img alt="" src="http://placehold.it/424x424"/>
-                            </a>
-                        </div>
-
-                        <div class="movie__info">
-                            <a href="movie-page-left.html" class="movie__title"
-                            >Prisoners (2013)
-                            </a>
-
-                            <p class="movie__time">153 min</p>
-
-                            <p class="movie__option">
-                                <a href="#">Crime</a> | <a href="#">Thriller</a> |
-                                <a href="#">Drama</a>
-                            </p>
-
-                            <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rating">5.0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Movie variant with time -->
-
-                    <!-- Movie variant with time -->
-                    <div class="movie movie--test movie--test--light movie--test--right">
-                        <div class="movie__images">
-                            <a href="movie-page-left.html" class="movie-beta__link">
-                                <img alt="" src="http://placehold.it/424x424"/>
-                            </a>
-                        </div>
-
-                        <div class="movie__info">
-                            <a href="movie-page-left.html" class="movie__title"
-                            >This Is the End (2013)
-                            </a>
-
-                            <p class="movie__time">107 min</p>
-
-                            <p class="movie__option">
-                                <a href="#">Comedy</a> | <a href="#">Fantasy</a>
-                            </p>
-
-                            <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rating">4.9</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Movie variant with time -->
-
-                    <!-- Movie variant with time -->
-                    <div  class="movie movie--test movie--test--dark movie--test--right">
-                        <div class="movie__images">
-                            <a href="movie-page-left.html" class="movie-beta__link">
-                                <img alt="" src="http://placehold.it/424x424"/>
-                            </a>
-                        </div>
-
-                        <div class="movie__info">
-                            <a href="movie-page-left.html" class="movie__title"
-                            >The Internship (2013)
-                            </a>
-
-                            <p class="movie__time">112 min</p>
-
-                            <p class="movie__option"><a href="#">Comedy</a></p>
-
-                            <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rating">5.0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Movie variant with time -->
                 </div>
 
                 <aside class="col-sm-4 col-md-3">
                     <div class="sitebar first-banner--left">
-                        <div class="banner-wrap first-banner--left">
-                            <img alt="banner" src="http://placehold.it/500x500"/>
+                        <div th:each="r:${ran}">
+                            <div class="banner-wrap first-banner--left">
+                                <img alt="banner" th:src="${released.get(r).poster}"/>
+                            </div>
                         </div>
 
-                        <div class="banner-wrap">
-                            <img alt="banner" src="http://placehold.it/500x500"/>
-                        </div>
-
-                        <div class="banner-wrap banner-wrap--last">
-                            <img alt="banner" src="http://placehold.it/500x500"/>
-                        </div>
                     </div>
                 </aside>
             </div>
@@ -467,11 +377,27 @@
 <!-- JavaScript -->
 <div th:replace="~{/fragment/common-fragment :: script}"></div>
 
+
 <script type="text/javascript">
     $(document).ready(function () {
         init_Home();
-        init_Rates();
+        // init_Rates();
     });
+</script>
+<script th:each="m:${released}">
+
+    $(document).ready(function () {
+        "use strict";
+        $('#score[[${m.id}]]').raty({
+            width: 130,
+            score: [[${m.score}]],
+            path: '/images/rate/',
+            starOff: 'star-off.svg',
+            starOn: 'star-on.svg',
+            readOnly:true
+        });
+    });
+
 </script>
 </body>
 </html>

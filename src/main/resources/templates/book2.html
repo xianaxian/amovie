@@ -126,10 +126,8 @@
                                 <span class="sits__place sits-price--cheap" data-place='D4' data-price='10'>D4</span>
                                 <span class="sits__place sits-price--cheap" data-place='D5' data-price='10'>D5</span>
                                 <span class="sits__place sits-price--cheap" data-place='D6' data-price='10'>D6</span>
-                                <span class="sits__place sits-price--cheap sits-state--not" data-place='D7'
-                                      data-price='10'>D7</span>
-                                <span class="sits__place sits-price--cheap sits-state--not" data-place='D8'
-                                      data-price='10'>D8</span>
+                                <span class="sits__place sits-price--cheap" data-place='D7' data-price='10'>D7</span>
+                                <span class="sits__place sits-price--cheap" data-place='D8' data-price='10'>D8</span>
                                 <span class="sits__place sits-price--cheap" data-place='D9' data-price='10'>D9</span>
                                 <span class="sits__place sits-price--cheap" data-place='D10' data-price='10'>D10</span>
                                 <span class="sits__place sits-price--cheap" data-place='D11' data-price='10'>D11</span>
@@ -403,10 +401,10 @@
                 <span class="arrow__info">结算</span>
             </a>
         </div>
+
     </form>
-
+<input type="hidden" id="price" th:value="${scene.price}"/>
     <div class="clearfix"></div>
-
     <div th:replace="~{/fragment/common-fragment :: footer}"></div>
 </div>
 
@@ -415,10 +413,23 @@
 
 <!-- JavaScript-->
 <div th:replace="~{/fragment/common-fragment :: script}"></div>
-
+<input id="selled" type="hidden" th:value="${selled}"/>
 <script type="text/javascript">
     $(document).ready(function () {
         init_BookingTwo();
+        var selled=JSON.parse($('#selled').val());
+        var price=$('#price').val();
+        console.log(price);
+        console.log(selled);
+        $('span').filter(function(){
+            let res=  $.inArray($(this).attr('data-place'), selled)!=-1;
+            return res;
+        }).addClass('sits-state--not');
+        // $('span').filter(function () {
+        //     let res=$(this).attr('class').indexOf('sits-price--cheap');
+        //     console.log(res);
+        //     return res;
+        // });
     });
 </script>
 

@@ -52,7 +52,7 @@
                             <strong>演员: </strong> <a href="#" th:text="${movie.actors}"></a>
                         </p>
                         <div class="movie__btns movie__btns--full" th:if="${session.user!=null}">
-                            <a href="#" class="btn btn-md btn--warning">预订此电影</a>
+                            <a th:if="${movie.status eq 1}" th:href="|/book/${movie.id}|" class="btn btn-md btn--warning">预订此电影</a>
                             <a href="#" class="watchlist">添加到播放列表</a>
                         </div>
                     </div>

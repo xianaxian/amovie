@@ -148,7 +148,7 @@
                         </p>
 
                         <div class="movie__btns" th:if="${session.user!=null}">
-                            <a href="#" class="btn btn-md btn--warning">预订此电影</a>
+                            <span th:if="${m.status eq 1}" ><a class="btn btn-md btn--warning" th:href="|/book/${m.id}|">预订此电影</a></span>
                             <span th:switch="${WLID.contains(m.id)}">
                             <a th:case="true" th:onclick="|del(${m.id})|" class="watchlist removeWatchlist">移除出播放列表</a>
                             <a th:case="*" th:onclick="|add(${m.id})|" class="watchlist">添加到播放列表</a>
