@@ -60,7 +60,7 @@
                 <span class="arrow__text arrow--prev"></span>
                 <span class="arrow__info"></span>
             </a>
-            <a href="book2.html" class="booking-pagination__next">
+            <a  class="booking-pagination__next">
                 <span class="arrow__text arrow--next">下一步</span>
                 <span class="arrow__info">选择座位</span>
             </a>
@@ -88,7 +88,6 @@
                 return false;
             }
             var id=scene.substring(5);
-            alert(id);
             window.location.href=`/book2/${id}`;
             return false;
         });

@@ -178,10 +178,10 @@
     </select>
 
     <select id="moviePageNoLoginCatetgory" resultMap="movieWithCategoryB" parameterType="int">
-        select movie.*,sc.avg,sc.num
+        select movie.*,sc.score,sc.num
         from movie
                  left join (
-            SELECT movie_id,AVG(score) avg,count(*) num
+            SELECT movie_id,AVG(score) score,count(*) num
             from score
             GROUP BY movie_id) sc
                            on movie.id=sc.movie_id
@@ -189,6 +189,17 @@
             select movie_id
             from movie_category
             where category_id = #{id})
+    </select>
+
+    <select id="search" parameterType="string" resultMap="movieWithCategoryB">
+        select movie.*,sc.score,sc.num
+        from movie
+                 left join (
+            SELECT movie_id,AVG(score) score,count(*) num
+            from score
+            GROUP BY movie_id) sc
+                           on movie.id=sc.movie_id
+        where ${param1} like  CONCAT('%',#{param2},'%')
     </select>
 
     <select id="rateList" resultType="com.ecjtu.amovie.form.RateListForm">
@@ -210,7 +221,7 @@
             from score
             GROUP BY movie_id) sc
                            on movie.id=sc.movie_id
-        order by score desc
+        order by score desc, num desc
         limit 6
     </select>
 </mapper>

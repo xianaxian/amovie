@@ -27,18 +27,20 @@
                         <div class="ticket-secondary">
                             <span class="ticket__item">Ticket number <strong
                                     class="ticket__number">a126bym4</strong></span>
-                            <span class="ticket__item ticket__date">25/10/2013</span>
-                            <span class="ticket__item ticket__time">17:45</span>
+                            <span class="ticket__item ticket__date" th:text="${#dates.format(order.createTime,'yyyy-MM-dd')}">25/10/2013</span>
+                            <span class="ticket__item ticket__time " th:text="${order.showtime}">17:45</span>
                             <span class="ticket__item">Cinema: <span class="ticket__cinema">Cineworld</span></span>
                             <span class="ticket__item">Hall: <span class="ticket__hall">Visconti</span></span>
                             <span class="ticket__item ticket__price">price: <strong
-                                    class="ticket__cost">$60</strong></span>
+                                    class="ticket__cost" th:text="'￥'+${order.totalPrice}"></strong></span>
                         </div>
 
                         <div class="ticket-primery">
-                            <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong
-                                    class="ticket__movie">The Fifth Estate (2013)</strong></span>
-                            <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">11F, 12F, 13F</span></span>
+                            <span class="ticket__item ticket__item--primery ticket__film">电影名<br><strong
+                                    class="ticket__movie" th:text="${order.movieName}"></strong></span>
+                            <span class="ticket__item ticket__item--primery">Sits:
+                                <span class="ticket__place" th:text="${order.bookedSeated}"></span>
+                            </span>
                         </div>
 
 

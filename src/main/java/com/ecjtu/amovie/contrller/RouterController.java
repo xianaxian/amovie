@@ -23,24 +23,24 @@ public class RouterController {
 
 
 
-    @GetMapping("/book1.html")
-    public String book1(){
-        return "book1";
-    }
-    @GetMapping("/book2.html")
-    public String book2(){
-        return "book2";
-    }
-    @GetMapping("/book3-buy.html")
-    public String book3_buy(){
-        return "book3-buy";
-    }
+//    @GetMapping("/book1.html")
+//    public String book1(){
+//        return "book1";
+//    }
+//    @GetMapping("/book2.html")
+//    public String book2(){
+//        return "book2";
+//    }
+//    @GetMapping("/book-final.html")
+//    public String book3_buy(){
+//        return "book-final";
+//    }
 
-
-    @GetMapping("/ticket.html")
-    public String ticket(){
-        return "ticket";
-    }
+//
+//    @GetMapping("/ticket.html")
+//    public String ticket(){
+//        return "ticket";
+//    }
 //
 //    @GetMapping("/register.html")
 //    public String register(){

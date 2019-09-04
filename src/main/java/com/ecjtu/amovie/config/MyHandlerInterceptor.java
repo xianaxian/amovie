@@ -12,20 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 public class MyHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String requestURI = request.getRequestURI();
-        if (requestURI.contains("book")&&request.getSession().getAttribute("user")==null){
-            throw new RuntimeException("您好像没有登陆");
+       // 用户登录后，user对象存在session中，名为user
+        String user="user";
+        if (request.getSession().getAttribute(user)==null){
+            response.sendRedirect( "/login");
+            return false;
+
         }
         return true;
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)  {
 
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)  {
 
     }
 }

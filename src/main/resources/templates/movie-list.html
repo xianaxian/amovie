@@ -19,13 +19,13 @@
                         class="search__sort"
                         tabindex="0"
                 >
-                    <option value="1" selected="selected">By title</option>
-                    <option value="2">By year</option>
-                    <option value="3">By producer</option>
-                    <option value="4">By title</option>
-                    <option value="5">By year</option>
+                    <option value="1" selected="selected">电影名</option>
+                    <option value="2">导演</option>
+                    <option value="3">演员</option>
+                    <option value="4">制片国家/地区</option>
+<!--                    <option value="5">By year</option>-->
                 </select>
-                <button type="submit" class="btn btn-md btn--danger search__button">
+                <button type="submit" id="search" class="btn btn-md btn--danger search__button">
                     search a movie
                 </button>
             </form>
@@ -37,69 +37,69 @@
         <div class="col-sm-12">
             <h2 class="page-heading">Movies</h2>
 
-            <!-- 筛选框 -->
-            <div class="select-area">
-                <form class="select" method="get">
-                    <select name="select_item" class="select__sort" tabindex="0">
-                        <option value="1" selected="selected">London</option>
-                        <option value="2">New York</option>
-                        <option value="3">Paris</option>
-                        <option value="4">Berlin</option>
-                        <option value="5">Moscow</option>
-                        <option value="3">Minsk</option>
-                        <option value="4">Warsawa</option>
-                        <option value="5">Kiev</option>
-                    </select>
-                </form>
+<!--            &lt;!&ndash; 筛选框 &ndash;&gt;-->
+<!--            <div class="select-area">-->
+<!--                <form class="select" method="get">-->
+<!--                    <select name="select_item" class="select__sort" tabindex="0">-->
+<!--                        <option value="1" selected="selected">London</option>-->
+<!--                        <option value="2">New York</option>-->
+<!--                        <option value="3">Paris</option>-->
+<!--                        <option value="4">Berlin</option>-->
+<!--                        <option value="5">Moscow</option>-->
+<!--                        <option value="3">Minsk</option>-->
+<!--                        <option value="4">Warsawa</option>-->
+<!--                        <option value="5">Kiev</option>-->
+<!--                    </select>-->
+<!--                </form>-->
 
-                <form class="select select--cinema" method="get" action="/categories">
-                    <select name="select_item" class="select__sort" tabindex="0">
-                        <option value="1" selected="selected">Cineworld</option>
-                        <option value="2">Empire</option>
-                        <option value="3">Everyman</option>
-                        <option value="4">Odeon</option>
-                        <option value="5">Picturehouse</option>
-                    </select>
-                </form>
+<!--                <form class="select select&#45;&#45;cinema" method="get" action="/categories">-->
+<!--                    <select name="select_item" class="select__sort" tabindex="0">-->
+<!--                        <option value="1" selected="selected">Cineworld</option>-->
+<!--                        <option value="2">Empire</option>-->
+<!--                        <option value="3">Everyman</option>-->
+<!--                        <option value="4">Odeon</option>-->
+<!--                        <option value="5">Picturehouse</option>-->
+<!--                    </select>-->
+<!--                </form>-->
 
-                <form class="select select--film-category" method="get">
-                    <select name="select_item" class="select__sort" tabindex="0">
-                    </select>
-                </form>
-            </div>
+<!--                <form class="select select&#45;&#45;film-category" method="get">-->
+<!--                    <select name="select_item" class="select__sort" tabindex="0">-->
+<!--                    </select>-->
+<!--                </form>-->
+<!--            </div>-->
 
-            <div class="tags-area">
-                <div class="tags tags--unmarked">
-                    <span class="tags__label">Sorted by:</span>
-                    <ul>
-                        <li class="item-wrap">
-                            <a href="/movies" class="tags__item item-active" data-filter="all"
-                            >all</a
-                            >
-                        </li>
-                        <li class="item-wrap">
-                            <a href="#" class="tags__item" data-filter="release"
-                            >release date</a
-                            >
-                        </li>
-                        <li class="item-wrap">
-                            <a href="#" class="tags__item" data-filter="popularity"
-                            >popularity</a
-                            >
-                        </li>
-                        <li class="item-wrap">
-                            <a href="#" class="tags__item" data-filter="comments"
-                            >comments</a
-                            >
-                        </li>
-                        <li class="item-wrap">
-                            <a href="#" class="tags__item" data-filter="ending"
-                            >ending soon</a
-                            >
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<!--            <div class="tags-area">-->
+<!--                <div class="tags tags&#45;&#45;unmarked">-->
+<!--                    <span class="tags__label">Sorted by:</span>-->
+<!--                    <ul>-->
+<!--                        <li class="item-wrap">-->
+<!--                            <a href="/movies" class="tags__item item-active" data-filter="all"-->
+<!--                            >all</a-->
+<!--                            >-->
+<!--                        </li>-->
+<!--                        <li class="item-wrap">-->
+<!--                            <a href="#" class="tags__item" data-filter="release"-->
+<!--                            >release date</a-->
+<!--                            >-->
+<!--                        </li>-->
+<!--                        <li class="item-wrap">-->
+<!--                            <a href="#" class="tags__item" data-filter="popularity"-->
+<!--                            >popularity</a-->
+<!--                            >-->
+<!--                        </li>-->
+<!--                        <li class="item-wrap">-->
+<!--                            <a href="#" class="tags__item" data-filter="comments"-->
+<!--                            >comments</a-->
+<!--                            >-->
+<!--                        </li>-->
+<!--                        <li class="item-wrap">-->
+<!--                            <a href="#" class="tags__item" data-filter="ending"-->
+<!--                            >ending soon</a-->
+<!--                            >-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <!-- Movie preview item -->
             <div th:each="m:${movies.list}">
@@ -128,22 +128,22 @@
                         </p>
 
                         <p class="movie__option">
-                            <strong>Country: </strong><a href="#" th:text="${m.country}"></a>
+                            <strong>制片国家/地区: </strong><a href="#" th:text="${m.country}"></a>
                         </p>
                         <p class="movie__option">
-                            <strong>Category: </strong>
+                            <strong>类别: </strong>
                             <span th:each="c:${m.categories}">
                             <a th:href="@{/movies(category=${c.id}) }" th:text="${c.name}">eeee</a>
                         </span>
                         </p>
                         <p class="movie__option">
-                            <strong>Release date: </strong><a href="#" th:text="${m.releaseDate}"></a>
+                            <strong>上映日期: </strong><a href="#" th:text="${#dates.format(m.releaseDate,'yyyy-MM-dd')}"></a>
                         </p>
                         <p class="movie__option">
-                            <strong>Director: </strong><a href="#" th:text="${m.directors}"></a>
+                            <strong>导演: </strong><a href="#" th:text="${m.directors}"></a>
                         </p>
                         <p class="movie__option">
-                            <strong>Actors: </strong>
+                            <strong>演员: </strong>
                             <a href="#" th:text="${m.actors}"></a>
                         </p>
 
@@ -173,7 +173,7 @@
             <!-- end movie preview item -->
 
             <div class="coloum-wrapper">
-                <div class="pagination paginatioon--full">
+                <div class="pagination paginatioon--full" th:if="${category!=null}">
                     <span th:if="${movies.pageNum eq 1}">
                         <a th:if="${category != null and category ne 0}"
                            th:href="@{/movies(pageNum=${movies.pageNum},category=${category})}"
@@ -205,6 +205,29 @@
                            class="pagination__next">next</a>
                     </span>
                 </div>
+
+                <div class="pagination paginatioon--full" th:if="${category==null}">
+                    <span th:if="${movies.pageNum eq 1}">
+                        <a th:href="@{/movies/search(pageNum=${movies.pageNum},type=${type},value=${value})}"
+                           class="pagination__prev">prev</a>
+                    </span>
+                    <span th:if="${movies.pageNum gt 1}">
+                        <a th:href="@{/movies/search(pageNum=${movies.pageNum}-1,type=${type},value=${value})}"
+                           class="pagination__prev">prev</a>
+                    </span>
+
+                    <span th:if="${movies.pageNum} lt ${movies.pages}">
+                        <a th:href="@{/movies/search(pageNum=${movies.pageNum}+1,type=${type},value=${value})}"
+                           class="pagination__next">next</a>
+                    </span>
+
+                    <span th:if="${movies.pageNum} eq ${movies.pages}">
+                        <a th:href="@{/movies/search(pageNum=${movies.pageNum},type=${type},value=${value})}"
+                           class="pagination__next">next</a>
+                    </span>
+                </div>
+
+
             </div>
         </div>
     </section>
@@ -239,6 +262,7 @@
             starOn: 'star-on.svg',
             readOnly:true
         });
+
     });
 
 </script>

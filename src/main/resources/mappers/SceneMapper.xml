@@ -6,19 +6,22 @@
     update scene
     <set>
       <if test="movieId != null">
-        movie_id = #{movieId,jdbcType=VARCHAR},
+        movie_id = #{movieId},
       </if>
       <if test="movieName != null">
-        movie_name = #{movieName ,jdbcType=VARCHAR},
+        movie_name = #{movieName},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=VARCHAR},
+        price = #{price},
       </if>
       <if test="seatNum != null">
-        seat_num = #{seatNum,jdbcType=VARCHAR},
+        seat_num = #{seatNum},
       </if>
       <if test="showtime != null">
-        showtime = #{showtime,jdbcType=TIMESTAMP},
+        showtime = #{showtime},
+      </if>
+      <if test="bookedSeat !=null ">
+          booked_seat=#{bookedSeat}
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}

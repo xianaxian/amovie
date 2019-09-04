@@ -26,9 +26,9 @@
                 <div class="choose-sits__info choose-sits__info--first">
                     <ul>
                         <li class="sits-price marker--none"><strong>价格</strong></li>
-                        <li class="sits-price sits-price--cheap">￥10</li>
-                        <li class="sits-price sits-price--middle">￥20</li>
-                        <li class="sits-price sits-price--expensive">￥30</li>
+                        <li class="sits-price sits-price--cheap" th:text="'￥'+${scene.price}">￥10</li>
+                        <li class="sits-price sits-price--middle" th:text="'￥'+${scene.price}">￥20</li>
+                        <li class="sits-price sits-price--expensive" th:text="'￥'+${scene.price}">￥30</li>
                     </ul>
                 </div>
 
@@ -318,70 +318,70 @@
                 </div>
 
                 <!-- 移动端视图 -->
-                <div class="col-sm-12 visible-xs">
-                    <div class="sits-area--mobile">
-                        <div class="sits-area--mobile-wrap">
-                            <div class="sits-select">
-                                <select name="sorting_item" class="sits__sort sit-row" tabindex="0">
-                                    <option value="1" selected='selected'>A</option>
-                                    <option value="2">B</option>
-                                    <option value="3">C</option>
-                                    <option value="4">D</option>
-                                    <option value="5">E</option>
-                                    <option value="6">F</option>
-                                    <option value="7">G</option>
-                                    <option value="8">I</option>
-                                    <option value="9">J</option>
-                                    <option value="10">K</option>
-                                    <option value="11">L</option>
-                                </select>
+                <!--                <div class="col-sm-12 visible-xs">-->
+                <!--                    <div class="sits-area&#45;&#45;mobile">-->
+                <!--                        <div class="sits-area&#45;&#45;mobile-wrap">-->
+                <!--                            <div class="sits-select">-->
+                <!--                                <select name="sorting_item" class="sits__sort sit-row" tabindex="0">-->
+                <!--                                    <option value="1" selected='selected'>A</option>-->
+                <!--                                    <option value="2">B</option>-->
+                <!--                                    <option value="3">C</option>-->
+                <!--                                    <option value="4">D</option>-->
+                <!--                                    <option value="5">E</option>-->
+                <!--                                    <option value="6">F</option>-->
+                <!--                                    <option value="7">G</option>-->
+                <!--                                    <option value="8">I</option>-->
+                <!--                                    <option value="9">J</option>-->
+                <!--                                    <option value="10">K</option>-->
+                <!--                                    <option value="11">L</option>-->
+                <!--                                </select>-->
 
-                                <select name="sorting_item" class="sits__sort sit-number" tabindex="1">
-                                    <option value="1" selected='selected'>1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                    <option value="13">13</option>
-                                    <option value="14">14</option>
-                                    <option value="15">15</option>
-                                    <option value="16">16</option>
-                                    <option value="17">17</option>
-                                    <option value="18">18</option>
-                                </select>
+                <!--                                <select name="sorting_item" class="sits__sort sit-number" tabindex="1">-->
+                <!--                                    <option value="1" selected='selected'>1</option>-->
+                <!--                                    <option value="2">2</option>-->
+                <!--                                    <option value="3">3</option>-->
+                <!--                                    <option value="4">4</option>-->
+                <!--                                    <option value="5">5</option>-->
+                <!--                                    <option value="6">6</option>-->
+                <!--                                    <option value="7">7</option>-->
+                <!--                                    <option value="8">8</option>-->
+                <!--                                    <option value="9">9</option>-->
+                <!--                                    <option value="10">10</option>-->
+                <!--                                    <option value="11">11</option>-->
+                <!--                                    <option value="12">12</option>-->
+                <!--                                    <option value="13">13</option>-->
+                <!--                                    <option value="14">14</option>-->
+                <!--                                    <option value="15">15</option>-->
+                <!--                                    <option value="16">16</option>-->
+                <!--                                    <option value="17">17</option>-->
+                <!--                                    <option value="18">18</option>-->
+                <!--                                </select>-->
 
-                                <a href="#" class="btn btn-md btn--warning toogle-sits">选择座位</a>
-                            </div>
-                        </div>
+                <!--                                <a href="#" class="btn btn-md btn&#45;&#45;warning toogle-sits">选择座位</a>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
 
-                        <a href="#" class="watchlist add-sits-line">添加新座位</a>
+                <!--                        <a href="#" class="watchlist add-sits-line">添加新座位</a>-->
 
-                        <aside class="sits__checked">
-                            <div class="checked-place">
-                                <span class="choosen-place"></span>
-                            </div>
-                            <div class="checked-result">
-                                ￥0
-                            </div>
-                        </aside>
+                <!--                        <aside class="sits__checked">-->
+                <!--                            <div class="checked-place">-->
+                <!--                                <span class="choosen-place"></span>-->
+                <!--                            </div>-->
+                <!--                            <div class="checked-result">-->
+                <!--                                ￥0-->
+                <!--                            </div>-->
+                <!--                        </aside>-->
 
-                        <img alt="" src="images/components/sits_mobile.png">
-                    </div>
-                </div>
+                <!--                        <img alt="" src="images/components/sits_mobile.png">-->
+                <!--                    </div>-->
+                <!--                </div>-->
             </div>
         </section>
     </div>
 
 
     <div class="clearfix"></div>
-    <form id='film-and-time' class="booking-form" method='get' action='book3-buy.html'>
+    <form id='film-and-time' class="booking-form" method='post' action='/book3'>
 
         <input type='text' name='choosen-number' class="choosen-number">
         <input type='text' name='choosen-number--cheap' class="choosen-number--cheap">
@@ -392,18 +392,20 @@
 
 
         <div class="booking-pagination booking-pagination--margin">
-            <a href="book1.html" class="booking-pagination__prev">
+            <a class="booking-pagination__prev" href="javascript:history.go(-1);">
                 <span class="arrow__text arrow--prev">上一步</span>
                 <span class="arrow__info">选择您要观看的场次</span>
             </a>
-            <a href="book3-buy.html" class="booking-pagination__next">
+            <a class="booking-pagination__next" id="next">
                 <span class="arrow__text arrow--next">下一步</span>
                 <span class="arrow__info">结算</span>
+                <!--                <input type="submit" class="arrow__info" text="结算"/>-->
             </a>
         </div>
 
     </form>
-<input type="hidden" id="price" th:value="${scene.price}"/>
+    <input type="hidden" id="price" th:value="${scene.price}"/>
+    <input type="hidden" id="scene_id" th:value="${scene.id}">
     <div class="clearfix"></div>
     <div th:replace="~{/fragment/common-fragment :: footer}"></div>
 </div>
@@ -417,19 +419,44 @@
 <script type="text/javascript">
     $(document).ready(function () {
         init_BookingTwo();
-        var selled=JSON.parse($('#selled').val());
-        var price=$('#price').val();
-        console.log(price);
-        console.log(selled);
-        $('span').filter(function(){
-            let res=  $.inArray($(this).attr('data-place'), selled)!=-1;
+        var selled = JSON.parse($('#selled').val());
+        var $id = $('#scene_id').val();
+        var $p=$('#price').val();
+        $('span').filter(function () {
+            let res = $.inArray($(this).attr('data-place'), selled) != -1;
             return res;
         }).addClass('sits-state--not');
-        // $('span').filter(function () {
-        //     let res=$(this).attr('class').indexOf('sits-price--cheap');
-        //     console.log(res);
-        //     return res;
-        // });
+        $('#next').click(function () {
+            var $num = $('.choosen-number').val();
+            var a = [];
+            $('.checked-place').children().each(function () {
+                a.push($(this).text())
+            });
+            var price=$('.checked-result').text().substring(1);
+            var data={
+                sceneId:$id,
+                ticketNum:$num,
+                totalPrice:price,
+                bookedSeated:a,
+                price:$p
+            }
+            console.log(a)
+            $.ajax({
+                url:'/book3',
+                method:'POST',
+                contentType:'application/json;charset=utf-8',
+                dataType:'json',
+                data:JSON.stringify(data),
+                success:function (data) {
+                    alert(data.message);
+                    if (data.code == 200) {
+                        window.location.href=data.data;
+                        console.log(data)
+                    }
+                }
+            })
+        });
+            // console.log(s);
     });
 </script>
 

@@ -63,17 +63,41 @@ public class MovieController {
         mav.addObject("category", categoryId);
         mav.setViewName("movie-list");
         User user = (User) session.getAttribute("user");
-        List<Integer> WLID= Collections.emptyList();
+        List<Integer> watchListId = Collections.emptyList();
+        if (user!=null){
+            //WatchList ID 该用户添加到观看列表的电影的id
+             watchListId = watchListService.selectByUser(user.getId());
+        }
+        mav.addObject("WLID", watchListId);
+        return mav;
+    }
+
+    @GetMapping("/search")
+    @ResponseBody
+    public ModelAndView search(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                               @RequestParam(name = "pageSize", required = false, defaultValue = "20") Integer pageSize,
+                               @RequestParam(name = "type", required = false,defaultValue = "-1")int searchType,
+                               @RequestParam(name = "value", required = false,defaultValue = "")String value,
+                               HttpSession session){
+        PageInfo<MovieResult> movies;
+        movies=movieService.search(pageNum, pageSize, searchType, value);
+
+        ModelAndView mav=new ModelAndView();
+        mav.addObject("movies",movies);
+        mav.addObject("type", searchType);
+        mav.addObject("value", value);
+        mav.setViewName("movie-list");
+        User user = (User) session.getAttribute("user");
+        List<Integer> watchListId= Collections.emptyList();
         if (user!=null){
             /**
              * WatchList ID 该用户添加到观看列表的电影的id
              */
-             WLID = watchListService.selectByUser(user.getId());
+            watchListId = watchListService.selectByUser(user.getId());
         }
-        mav.addObject("WLID", WLID);
+        mav.addObject("WLID", watchListId);
         return mav;
     }
-
     /**
      * 单个电影的页面
      * @param id 电影的id

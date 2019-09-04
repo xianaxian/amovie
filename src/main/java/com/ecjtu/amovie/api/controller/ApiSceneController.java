@@ -15,10 +15,10 @@ import java.util.List;
 @CrossOrigin
 @Controller
 @RequestMapping("/api")
-public class apiSceneController {
+public class ApiSceneController {
     private final SceneService sceneService;
 
-    public apiSceneController(SceneService sceneService) {
+    public ApiSceneController(SceneService sceneService) {
         this.sceneService = sceneService;
     }
 

@@ -1,11 +1,12 @@
 package com.ecjtu.amovie.contrller;
 
-import com.ecjtu.amovie.api.entity.Movie;
 import com.ecjtu.amovie.api.entity.User;
+import com.ecjtu.amovie.api.service.OrderService;
 import com.ecjtu.amovie.api.service.ScoreService;
 import com.ecjtu.amovie.api.service.UserService;
 import com.ecjtu.amovie.api.service.WatchListService;
 import com.ecjtu.amovie.form.MovieResult;
+import com.ecjtu.amovie.form.OrderResult;
 import com.ecjtu.amovie.form.RateForm;
 import com.ecjtu.amovie.form.RegisterUserForm;
 import com.ecjtu.amovie.utils.MD5Utils;
@@ -13,12 +14,12 @@ import com.ecjtu.amovie.utils.result.JsonResult;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author xianaixan
@@ -29,11 +30,13 @@ public class UserController {
     private final UserService userService;
     private final WatchListService watchListService;
     private final ScoreService scoreService;
+    private final OrderService orderService;
 
-    public UserController(UserService userService, WatchListService watchListService, ScoreService scoreService) {
+    public UserController(UserService userService, WatchListService watchListService, ScoreService scoreService, OrderService orderService) {
         this.userService = userService;
         this.watchListService = watchListService;
         this.scoreService = scoreService;
+        this.orderService = orderService;
     }
 
 
@@ -111,6 +114,15 @@ public class UserController {
         return JsonResult.error(404, "移除失败");
     }
 
+    @GetMapping("/ticket")
+    public ModelAndView ticket( HttpSession session){
+        ModelAndView mav=new ModelAndView();
+        User user=(User)session.getAttribute("user");
+        List<OrderResult> orderResults = orderService.selectInfoByUser(user.getId());
+        mav.addObject("tickets", orderResults);
+        mav.setViewName("ticket");
+        return mav;
+    }
     @PostMapping("/rate")
     @ResponseBody
     public JsonResult rate(@Valid @RequestBody RateForm rate, HttpSession session){

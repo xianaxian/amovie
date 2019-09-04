@@ -17,10 +17,10 @@ import java.util.List;
 @CrossOrigin
 @Controller
 @RequestMapping("/api/categories")
-public class apiCategoryController {
+public class ApiCategoryController {
     private final CategoryService categoryService;
 
-    public apiCategoryController(CategoryService categoryService) {
+    public ApiCategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 

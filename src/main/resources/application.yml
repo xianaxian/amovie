@@ -25,6 +25,11 @@ mybatis:
 logging:
   level:
     root: info
+    com.ecjtu.amovie.api.repository: debug
+#      ecjtu:
+#        amovie:
+#          api:
+#            repository: debug
 pagehelper:
 #  auto-dialect: mysql
 #  reasonable: true

@@ -31,7 +31,7 @@
                         <p class="movie__time" ><span th:text="${movie.duration}"></span>Min</p>
 
                         <p class="movie__option">
-                            <strong>国家: </strong><a href="#" th:text="${movie.country}"></a>
+                            <strong>制片国家/地区: </strong><a href="#" th:text="${movie.country}"></a>
                         </p>
                         <p class="movie__option">
                             <strong>年份: </strong><a href="#" th:text="${movie.releaseDate.getYear()+1900}"></a>
@@ -78,7 +78,7 @@
                         </div>
                         <ul class="col-sm-8 items-wrap">
                             <span th:each="s:${scenes}">
-                                <li  class="time-select__item" th:data-time="${s.showtime}" th:text="${s.showtime}"></li>
+                                <li th:id="|scene${s.id}|" onclick="select(this)" class="time-select__item" th:data-time="${s.showtime}" th:text="${s.showtime}"></li>
                             </span>
                             <span th:if="${scenes.isEmpty()}" >
                                 <li th:text="好像没有场次"></li>
@@ -159,6 +159,16 @@
         init_MoviePage();
         init_Rates();
     });
+    var scene;
+    function select(o) {
+        scene= $(o).attr('id');
+        if (scene==null){
+            alert("您好像没有选择哪个场次");
+            return false;
+        }
+        var id=scene.substring(5);
+        window.location.href=`/book2/${id}`;
+    }
 </script>
 </body>
 </html>

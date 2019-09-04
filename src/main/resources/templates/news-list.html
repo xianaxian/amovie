@@ -17,7 +17,9 @@
                 <div th:each="n:${news.list}">
                     <!-- News post article-->
                     <article class="post post--news">
-
+<!--                        <a th:href="'/news/'+${news.id}" class="post__image-link">-->
+<!--                            <img alt='' src="/images/bg-video.jpg">-->
+                        </a>
                         <h1><a href="single-page-full.html" class="post__title-link" th:href="|/news/${n.id}|" th:text="${n.title}"></a></h1>
                         <p class="post__date" th:text="${n.createTime}"> </p>
 
@@ -29,6 +31,7 @@
                     </article>
                     <!-- end news post article-->
                 </div>
+
 
 
                 <div class="pagination">

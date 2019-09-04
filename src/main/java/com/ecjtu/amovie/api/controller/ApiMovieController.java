@@ -15,11 +15,11 @@ import java.util.List;
 @CrossOrigin
 @Controller
 @RequestMapping("/api/movies")
-public class apiMovieController {
+public class ApiMovieController {
     private final MovieService movieService;
 
 
-    public apiMovieController(MovieService movieService) {
+    public ApiMovieController(MovieService movieService) {
         this.movieService = movieService;
     }
 
@@ -28,7 +28,7 @@ public class apiMovieController {
      *
      * @param pageNum 页码
      * @param pageSize 页每页大小
-     * @return
+     * @return JSON数据
      */
     @GetMapping
     @ResponseBody
@@ -38,23 +38,12 @@ public class apiMovieController {
         return JsonResult.success("查询电影类别成功", movies);
     }
 
-/*    @GetMapping
-    @ResponseBody
-    public ModelAndView getList(@RequestParam(name = "pageNum", required = false, defaultValue = "1") Integer pageNum,
-                             @RequestParam(name = "pageSize", required = false, defaultValue = "2") Integer pageSize) {
-        Page<Movie> movies = movieService.getMoviesByPage(pageNum, pageSize);
-        ModelAndView mav=new ModelAndView();
-        mav.addObject("movies",movies);
-        mav.setViewName("movie-list");
-
-        return mav;
-    }*/
 
     /**
      * 获取电影信息
      *
-     * @param id
-     * @return
+     * @param id 电影的id
+     * @return JSON数据
      */
     @GetMapping("/{id}")
     @ResponseBody

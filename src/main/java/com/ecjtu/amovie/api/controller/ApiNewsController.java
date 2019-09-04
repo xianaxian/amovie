@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @Controller
 @RequestMapping("/api/news")
-public class apiNewsController {
-    @Autowired
-    private NewsService newsService;
+public class ApiNewsController {
+    private final NewsService newsService;
+
+    public ApiNewsController(NewsService newsService) {
+        this.newsService = newsService;
+    }
 
 
     /**

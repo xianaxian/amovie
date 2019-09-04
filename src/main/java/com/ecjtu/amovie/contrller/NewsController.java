@@ -44,7 +44,7 @@ public class NewsController {
      * @return mav
      */
     @GetMapping("/{id}")
-    public ModelAndView getANews(@PathVariable("id") Integer id) {
+    public ModelAndView getNews(@PathVariable("id") Integer id) {
         News aNews = newsService.getOneNews(id);
         ModelAndView mav=new ModelAndView();
         mav.setViewName("news");

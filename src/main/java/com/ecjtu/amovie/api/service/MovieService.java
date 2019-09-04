@@ -8,6 +8,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,14 +38,15 @@ public class MovieService {
     }
 
     public PageInfo<Movie> getMoviesByPage(int pageNum, int pageSize, int category) {
-        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(()->movieRepository.selectByCategory(category));
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> movieRepository.selectByCategory(category));
     }
 
     /**
      * 查询电影排行版的前20
+     *
      * @return 前20个电影的信息
      */
-    public List<RateListForm> getRankingList(){
+    public List<RateListForm> getRankingList() {
         return movieRepository.rateList();
     }
 
@@ -53,7 +55,18 @@ public class MovieService {
     }
 
     public PageInfo<MovieResult> moviePageNoLoginCatetgory(int pageNum, int pageSize, int category) {
-        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(()->movieRepository.moviePageNoLoginCatetgory(category));
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> movieRepository.moviePageNoLoginCatetgory(category));
+    }
+
+    public PageInfo<MovieResult> search(int pageNum, int pageSize, int searchType, String value) {
+        String column;
+        String[] arr = {"name", "directors", "actors", "country"};
+        column = (searchType > 0 && searchType < 5) ? arr[searchType-1] : "";
+        if (StringUtils.isEmpty(column)) {
+            throw new RuntimeException("搜索没有选择合适的类别");
+        }
+        String finalColumn = column;
+        return PageHelper.startPage(pageNum, pageSize).doSelectPageInfo(() -> movieRepository.search(finalColumn, value));
     }
 
     /**
@@ -89,7 +102,7 @@ public class MovieService {
      * @param movie 更新的电影的信息
      * @return 返回是否更新成功
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public int updateOneMovie(Movie movie) {
         if (movie.getCategoryIds() == null) {
             return movieRepository.updateOne(movie);
@@ -108,32 +121,33 @@ public class MovieService {
      * @param id 电影的id
      * @return 返回删除电影表的受影响的行数, 1表示删除成功, 此处写的很奇怪
      */
-    @Transactional
+    @Transactional(rollbackFor = RuntimeException.class)
     public int deleteOneMovie(Integer id) {
         movieRepository.deleteCategories(id);
         return movieRepository.deleteOne(id);
     }
 
-    public List<Movie> selectReleased(){
-         return movieRepository.selectReleased();
+    public List<Movie> selectReleased() {
+        return movieRepository.selectReleased();
     }
 
     /**
-     * 没有测试
+     * 没有测试(最终也没有用)
      * 据一些条件查询电影
-     * @param conditions  <属性的名称,属性的值>
+     *
+     * @param conditions <属性的名称,属性的值>
      * @return 按照条件查询到的东西
      */
-    public List<Movie> selectByCondition(Map<String,Object> conditions){
+    public List<Movie> selectByCondition(Map<String, Object> conditions) {
         return movieRepository.selectByCondition(conditions);
     }
 
 
-    public List<MovieResult> bestMovie(){
+    public List<MovieResult> bestMovie() {
         return movieRepository.bestMovie();
     }
 
-    public List<MovieResult> released(){
+    public List<MovieResult> released() {
         return movieRepository.released();
     }
 
